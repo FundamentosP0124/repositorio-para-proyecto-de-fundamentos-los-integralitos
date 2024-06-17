@@ -41,18 +41,46 @@ int opcion;
     cin >> jugador1;
     cout << "Ahora ingresa el nombre del jugador 2: ";
     cin >> jugador2;
-    
+    cout << endl;
+    /*Dialogo de los personajes*/
+    cout << "======================" << endl;
+    cout << "**Inicia el juego**" << endl;
+    cout << "======================" << endl;
+    cout << endl;
+    cout << jugador1 << ": " << "No puedo creer que finalmente estemos en camino a Londres para presentar nuestro proyecto" << endl;
+    cout << jugador2 << ": "<< "Si, despues de todo el trabajo duro, esto es irreal" << endl;
+    cout << jugador1 << ": "<< "Nuestro algoritmo va a cambiar el mundo, estoy seguro de eso" << endl;
+    cout << jugador2 << ": "<< "Y no solo eso, los millones y la fama mundial no estaran nada mal!" << endl;
+    cout << jugador1 << ": "<< "Tienes razon. Este es solo el comienzo de algo grande" << endl;
+    cout << jugador2 << ": "<< "Mira, estamos a punto de despegar. Preparate!" << endl;
+    cout << endl << "Unas horas mas tarde, en medio del vuelo, el avion sufre un desperfecto..." << endl << endl;
+    cout << "Piloto: " "Atencion pasajeros, estamos experimentando un problema tecnico grave! Preparense para un aterrizaje de emergencia" << endl << endl;
+    cout << jugador1 << ": "<< "Oh no! Que vamos a hacer?" << endl;
+    cout << jugador2 << ": "<< "Manten la calma, tenemos que seguir las instrucciones del piloto y esperar lo mejor" << endl;
+    cout << endl << "El avion se estrella en una isla remota en medio del oceano..." << endl << endl;
+    cout << jugador1 << ": "<< "Estas bien?" << endl;
+    cout << jugador2 << ": "<< "Si, creo que si. Donde estamos?" << endl;
+    cout << jugador1 << ": "<< "Parece que estamos varados en una isla desierta..." << endl;
+    cout << jugador2 << ": "<< "Tenemos que buscar refugio y agua. No podemos quedarnos aqui esperando" << endl;
+    cout << jugador1 << ": "<< "Tienes razon. Vamos, no podemos rendirnos ahora." << endl << endl;
+  /*Fin de los primeros dialogos entre los jugadores :3*/
+
+
     do{
       if(contadordia==1){   //Contador de dias
+        cout << "===============" << endl;
         cout<<"Dia 1\n";
+        cout << "===============" << endl;
         contadordia++;
       }else if(turno==true){
        cout<<"Dia "<<contadordia<<"\n";
        contadordia++;
       }
+
       switch (turno){
     case true:
        cout<<"AA\n"; //Aqui va todo el codigo del juador 1, el cout es namas para ver si funcionaba lo de los turnes jeje
+       
         break;
 
     case false:
@@ -73,10 +101,10 @@ int opcion;
         /*Agregar codigo aca papuh*/
         break;
     case 2:
-        cout << "Historia del juego" << endl;
+        cout << "Historia del juego" << endl << endl;
         cout << "Dos amigos inseparables desarrollan un algoritmo revolucionario que les promete millones y fama mundial." << endl;
-        cout << "En camino a una reunion crucial en Londres, su jet privado se estrella en una isla remota." << endl;
-        cout << "Con pocos recursos, luchan por sobrevivir, construyendo refugios y buscando alimentos." << endl;
+        cout << "En camino a una reunion crucial en Londres, su jet privado se estrella en una isla remota" << endl;
+        cout << "Con pocos recursos, luchan por sobrevivir, construyendo refugios y buscando alimentos" << endl;
         cout << "La situacion se vuelve desesperada con el paso de los dias, y ambos se debilitan por la falta de comida y agua" << endl;
         cout << "La tension crece mientras enfrentan la posibilidad de no ser rescatados, poniendo su amistad y sus vidas en riesgo" << endl;
         cout << endl;
