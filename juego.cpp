@@ -31,9 +31,9 @@ int opcion;
     {
     case 1:
 
-    cout << "Por favor, ingresa el nombre del jugador 1:";
+    cout << "Por favor, ingresa el nombre del jugador 1: ";
     cin >> jugador1;
-    cout << "Ahora ingresa el nombre del jugador 2:";
+    cout << "Ahora ingresa el nombre del jugador 2: ";
     cin >> jugador2;
     
 
