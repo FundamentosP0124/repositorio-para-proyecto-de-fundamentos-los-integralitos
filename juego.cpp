@@ -1,8 +1,10 @@
 #include <iostream>
 #include <conio.h>
 #include <string>
+#include <time.h>
 using namespace std;
 
+int numrand();
 
 int main(){
 
@@ -24,8 +26,10 @@ int opcion;
     cin >> opcion;
     cout << endl << endl;
     /*Esto lo hice para que el usuario este obligado a dogitar un numero valido*/
-
- } while (opcion > 4);
+     if(opcion > 4||opcion<1){
+        cout<<"Favor ingrese un valor valido\n";
+     }
+ } while (opcion > 4||opcion<1);
 
     switch (opcion)
     {
@@ -49,7 +53,7 @@ int opcion;
         cout << endl;
     do
     { cout << "Presiona 1 para volver al menu principal:";
-      cin >> resp;  } while (resp > 1);
+      cin >> resp;  } while (resp != 1);
         break;
     case 3:
         cout << "Este juego se basa en la toma de decisiones criticas que determinaran" << endl;
@@ -62,7 +66,7 @@ int opcion;
         cout << endl;
          do
     { cout << "Presiona 1 para volver al menu principal:";
-      cin >> resp;  } while (resp > 1);
+      cin >> resp;  } while (resp != 1);
 
         break;
     case 4:
@@ -75,4 +79,11 @@ int opcion;
 
 }while (resp == 1);
     return 0;
+}
+
+int numrand(){
+int dato;
+srand(time(NULL));
+dato = 1 + rand()%(100);
+return dato;
 }
