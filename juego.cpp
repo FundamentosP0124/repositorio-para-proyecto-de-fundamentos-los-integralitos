@@ -12,6 +12,8 @@ cout << "Pulsa cualquier letra para comenzar..." << endl << endl;
     _getch();
 
 int resp;  /*Variable para volver al menu principal*/ 
+int j1vida=100,j2vida=100, limitedias=10, contadordia=1;//La vida de los jugadores, limite de dias y contador de dias
+bool turno=true; //Son los turnos de cada jugador
 string jugador1, jugador2; /*variables para almacenar los nombres de los jugadores*/
 do /*Este do se conecta con el while de resp y sirve para volver al menu principal*/
 {
@@ -40,7 +42,34 @@ int opcion;
     cout << "Ahora ingresa el nombre del jugador 2: ";
     cin >> jugador2;
     
+    do{
+      if(contadordia==1){   //Contador de dias
+        cout<<"Dia 1\n";
+        contadordia++;
+      }else if(turno==true){
+       cout<<"Dia "<<contadordia<<"\n";
+       contadordia++;
+      }
+      switch (turno){
+    case true:
+       cout<<"AA\n"; //Aqui va todo el codigo del juador 1, el cout es namas para ver si funcionaba lo de los turnes jeje
+        break;
 
+    case false:
+    cout<<"EEE\n"; //Aqui va todo el codigo del jugador 2
+        break;
+    }
+    if(turno==true){
+        turno = false;
+    }else{
+        turno = true;
+    }
+    if(turno==true){ //Para los turnos como un turno se gasta cuando pasan los dos jugadores entonces deben de jugar los dos para poder pasar un turno
+      limitedias--;
+    }
+   
+    
+    }while(j1vida!=0&&j2vida!=0&&limitedias!=0); 
         /*Agregar codigo aca papuh*/
         break;
     case 2:
