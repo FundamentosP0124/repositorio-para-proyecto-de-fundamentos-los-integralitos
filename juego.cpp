@@ -4,7 +4,7 @@
 #include <time.h>
 using namespace std;
 
-int numrand();
+int numrand(); //Declaracion de funcion de numero aleatorio
 
 int main(){
 
@@ -81,7 +81,7 @@ int opcion;
     return 0;
 }
 
-int numrand(){
+int numrand(){  //Funcion para numero aleatorio
 int dato;
 srand(time(NULL));
 dato = 1 + rand()%(100);
