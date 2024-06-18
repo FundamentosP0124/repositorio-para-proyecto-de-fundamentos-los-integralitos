@@ -10,7 +10,7 @@ int main(){
 
 cout << "Pulsa cualquier letra para comenzar..." << endl << endl;
     _getch();
-
+int numale=0;
 int resp;  /*Variable para volver al menu principal*/ 
 int j1vida=100,j2vida=100, limitedias=10, contadordia=1;//La vida de los jugadores, limite de dias y contador de dias
 bool turno=true; //Son los turnos de cada jugador
@@ -68,23 +68,72 @@ int opcion;
 
     do{
       if(contadordia==1){   //Contador de dias
-        cout << "===============" << endl;
-        cout<<"Dia 1\n";
-        cout << "===============" << endl;
+        cout << "\t===============" << endl;
+        cout<<"\tDia 1\n";
+        cout << "\t===============" << endl;
         contadordia++;
       }else if(turno==true){
-       cout<<"Dia "<<contadordia<<"\n";
+       cout<<"\t===============\n";
+       cout<<"\tDia "<<contadordia<<"\n";
+       cout<<"\t===============\n";
        contadordia++;
       }
 
       switch (turno){
     case true:
-       cout<<desiciones(); //Aqui va todo el codigo del juador 1, el cout es namas para ver si funcionaba lo de los turnes jeje
+        numale = numrand();
+
+switch(numale){
+  case 1:
+  cout<<"A\n";
+  break;
+  case 2:
+  cout<<"b\n";
+  break;
+  case 3:
+  cout<<"C\n";
+  break;
+  case 4:
+  cout<<"D\n";
+  break;
+  case 5:
+  cout<<"E\n";
+  break;
+  case 6:
+  cout<<"F\n";
+  break;
+}
+_getch();
+numale = 0;
+//Aqui va todo el codigo del juador 1, el cout es namas para ver si funcionaba lo de los turnes jeje
        
         break;
 
     case false:
-    cout<<desiciones(); //Aqui va todo el codigo del jugador 2
+    numale = numrand();
+
+switch(numale){
+  case 1:
+  cout<<"A\n";
+  break;
+  case 2:
+  cout<<"b\n";
+  break;
+  case 3:
+  cout<<"C\n";
+  break;
+  case 4:
+  cout<<"D\n";
+  break;
+  case 5:
+  cout<<"E\n";
+  break;
+  case 6:
+  cout<<"F\n";
+  break;
+} 
+_getch();
+numale = 0;//Aqui va todo el codigo del jugador 2
         break;
     }
     if(turno==true){
@@ -139,34 +188,9 @@ int opcion;
 }
 
 int numrand(){  //Funcion para numero aleatorio
-int dato;
+int dato=0;
 srand(time(NULL));
 dato = 1 + rand()%(6);
 return dato;
 }
 
-int desiciones(){
-int numale = numrand();
-
-switch(numale){
-  case 1:
-  cout<<"A";
-  break;
-  case 2:
-  cout<<"b";
-  break;
-  case 3:
-  cout<<"C";
-  break;
-  case 4:
-  cout<<"D";
-  break;
-  case 5:
-  cout<<"E";
-  break;
-  case 6:
-  cout<<"F";
-  break;
-}
-return numale;
-}
