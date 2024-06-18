@@ -5,7 +5,7 @@
 using namespace std;
 
 int numrand(); //Declaracion de funcion de numero aleatorio
-
+int desiciones();
 int main(){
 
 cout << "Pulsa cualquier letra para comenzar..." << endl << endl;
@@ -79,12 +79,12 @@ int opcion;
 
       switch (turno){
     case true:
-       cout<<"AA\n"; //Aqui va todo el codigo del juador 1, el cout es namas para ver si funcionaba lo de los turnes jeje
+       cout<<desiciones(); //Aqui va todo el codigo del juador 1, el cout es namas para ver si funcionaba lo de los turnes jeje
        
         break;
 
     case false:
-    cout<<"EEE\n"; //Aqui va todo el codigo del jugador 2
+    cout<<desiciones(); //Aqui va todo el codigo del jugador 2
         break;
     }
     if(turno==true){
@@ -141,6 +141,32 @@ int opcion;
 int numrand(){  //Funcion para numero aleatorio
 int dato;
 srand(time(NULL));
-dato = 1 + rand()%(100);
+dato = 1 + rand()%(6);
 return dato;
+}
+
+int desiciones(){
+int numale = numrand();
+
+switch(numale){
+  case 1:
+  cout<<"A";
+  break;
+  case 2:
+  cout<<"b";
+  break;
+  case 3:
+  cout<<"C";
+  break;
+  case 4:
+  cout<<"D";
+  break;
+  case 5:
+  cout<<"E";
+  break;
+  case 6:
+  cout<<"F";
+  break;
+}
+return numale;
 }
