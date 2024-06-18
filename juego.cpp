@@ -77,10 +77,10 @@ int opcion;
        contadordia++;
       }
 
+
       switch (turno){
     case true:
        cout<<"AA\n"; //Aqui va todo el codigo del juador 1, el cout es namas para ver si funcionaba lo de los turnes jeje
-       
         break;
 
     case false:
