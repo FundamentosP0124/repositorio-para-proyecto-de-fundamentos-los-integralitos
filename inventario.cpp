@@ -3,26 +3,32 @@
 #include <string>
 using namespace std;
 
-int main() {
+int main()
+{
     string objetosDisponibles[] = {"cuchillo", "fosforos", "radio", "alimentos", "bebidas", "lupa"};
     string suministros[4];
     char a;
     int objetosRecolectados = 0;
     srand(static_cast<unsigned int>(time(0)));
 
-    while (objetosRecolectados < 4) {
+    while (objetosRecolectados < 4)
+    {
         cout << "Quieres recolectar un objeto? (y/n): ";
         cin >> a;
 
-        if (a == 'y') {
+        if (a == 'y')
+        {
             int indiceAleatorio;
             bool objetoRepetido;
-            do {
+            do
+            {
                 objetoRepetido = false;
                 indiceAleatorio = rand() % 6;
 
-                for (int i = 0; i < objetosRecolectados; i++) {
-                    if (suministros[i] == objetosDisponibles[indiceAleatorio]) {
+                for (int i = 0; i < objetosRecolectados; i++)
+                {
+                    if (suministros[i] == objetosDisponibles[indiceAleatorio])
+                    {
                         objetoRepetido = true;
                         break;
                     }
@@ -31,7 +37,9 @@ int main() {
 
             suministros[objetosRecolectados++] = objetosDisponibles[indiceAleatorio];
             cout << "Recolectaste: " << suministros[objetosRecolectados - 1] << endl;
-        } else {
+        }
+        else
+        {
             cout << "No has recolectado ningun objeto." << endl;
             break;
         }
