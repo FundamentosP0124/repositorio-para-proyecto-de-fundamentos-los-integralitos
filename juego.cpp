@@ -2,12 +2,15 @@
 #include <conio.h>
 #include <string>
 #include <time.h>
+#include <cstdio>
 using namespace std;
+
+
 
 int numrand(); // Declaracion de funcion de numero aleatorio
 int main()
 {
-
+  
   cout << "Pulsa cualquier letra para comenzar..." << endl
        << endl;
   _getch();
@@ -24,19 +27,18 @@ int main()
   do /*Este do se conecta con el while de resp y sirve para volver al menu principal*/
   {
     int opcion;
-    cout << "**Menu principal**" << endl
-         << endl;
-    cout << " 1..... Iniciar juego " << endl;
-    cout << " 2......Historia " << endl;
-    cout << " 3......Como jugar " << endl;
-    cout << " 4......Salir " << endl;
+   
+    cout << "\033[105;97m<Menu principal/>      \033[0m" << endl << endl;
+    cout << "\033[106;97m > 1.....Iniciar juego \033[0m\n" << endl;
+    cout << "\033[103;97m > 2.....Historia      \033[0m\n" << endl;
+    cout << "\033[104;97m > 3.....Como jugar    \033[0m\n" << endl;
+    cout << "\033[101;97m > 4.....Salir         \033[0m\n" << endl;
     do
     {
       cout << "Digita tu opcion: ";
       cin >> opcion;
-      cout << endl
-           << endl;
-      /*Esto lo hice para que el usuario este obligado a dogitar un numero valido*/
+      cout << endl;
+         
       if (opcion > 4 || opcion < 1)
       {
         cout << "Favor ingrese un valor valido\n";
@@ -65,7 +67,7 @@ int main()
       cout << jugador2 << ": " << "Mira, estamos a punto de despegar. Preparate!" << endl;
       cout << endl
            << "Unas horas mas tarde, en medio del vuelo, el avion sufre un desperfecto..." << endl
-           << endl;
+            << endl;
       cout << "Piloto: "
               "Atencion pasajeros, estamos experimentando un problema tecnico grave! Preparense para un aterrizaje de emergencia"
            << endl
@@ -88,7 +90,7 @@ int main()
         if (contadordia == 0)
         { // Contador de dias
           cout << "\t===============" << endl;
-          cout << "\tDia 1\n";
+          cout << "\t    Dia 1\n";
           cout << "\t===============" << endl;
           contadordia++;
         }
@@ -107,7 +109,7 @@ int main()
           {
           case 1:
             cout << "Luego de la caida del avion tu " << jugador1 << " apesar de algunos golpes y heridas te encuentras bien\n";
-            cout << "Ves humo a lo lejos viniendo de dos direcciones distantes ¿a donde deberias ir ahora al humo que se ve al norte o el humo que se ve al este?\n";
+            cout << "Ves humo a lo lejos viniendo de dos direcciones distantes a donde deberias ir ahora al humo que se ve al norte o el humo que se ve al este?\n";
             do
             {
               cout << "1. Al norte\n"
@@ -123,7 +125,7 @@ int main()
             {
               cout << "Al atravezar un poco de bosque encuentras los restos de la cabina del avion\n";
               cout << "Aunque pueda tener en su interior cosas para ayudarte a sobrevivir se ve un poco inseguro\n";
-              cout << "¿Deseas entrar a la cabina o investigar los alrededores?\n";
+              cout << "Deseas entrar a la cabina o investigar los alrededores?\n";
               do
               {
 
@@ -134,7 +136,9 @@ int main()
                 {
                   cout << "Favor elija una de las opciones disponibles\n";
                 }
+                
               } while (desicion != 1 && desicion != 2);
+
               if (desicion == 1)
               {
                 cout << "Ingresas a la cabina del avion y enuentras un poco de comida y agua\n";
@@ -207,7 +211,7 @@ int main()
                   cout << "Fisicamente te encuentras bien, pero tu ego no lo esta\n";
                   break;
                 }
-                cout << "Luego de la caida vez una caja ¿Quieres abrirla?\n";
+                cout << "Luego de la caida vez una caja, Quieres abrirla?\n";
                 do
                 {
 
@@ -241,6 +245,11 @@ int main()
               }
               cout << "Ves la sucia cama de la cabana pero decides acostarte y pasar la noche en el lugar\n";
             }
+
+            cout <<"Quieres ver tu inventario?  y/n" << endl;
+            
+             //fin del dia 1
+              
             }
             
             break;
@@ -307,38 +316,43 @@ int main()
       /*Agregar codigo aca papuh*/
       break;
     case 2:
-      cout << "Historia del juego" << endl
-           << endl;
-      cout << "Dos amigos inseparables desarrollan un algoritmo revolucionario que les promete millones y fama mundial." << endl;
-      cout << "En camino a una reunion crucial en Londres, su jet privado se estrella en una isla remota" << endl;
-      cout << "Con pocos recursos, luchan por sobrevivir, construyendo refugios y buscando alimentos" << endl;
-      cout << "La situacion se vuelve desesperada con el paso de los dias, y ambos se debilitan por la falta de comida y agua" << endl;
-      cout << "La tension crece mientras enfrentan la posibilidad de no ser rescatados, poniendo su amistad y sus vidas en riesgo" << endl;
-      cout << endl;
+         cout << "\033[93m <Historia del juego/>  \033[0m\n" << endl;
+         cout << "\033[93m Dos amigos inseparables desarrollan un algoritmo revolucionario que les promete millones y fama mundial.  \033[0m\n";
+         cout << "\033[93m En camino a una reunion crucial en Londres, su jet privado se estrella en una isla remota  \033[0m\n";
+         cout << "\033[93m Con pocos recursos, luchan por sobrevivir, construyendo refugios y buscando alimentos  \033[0m\n";
+         cout << "\033[93m La situacion se vuelve desesperada con el paso de los dias, y ambos se debilitan por la falta de comida y agua  \033[0m\n";
+         cout << "\033[93m La tension crece mientras enfrentan la posibilidad de no ser rescatados, poniendo su amistad y sus vidas en riesgo  \033[0m\n" << endl;
+         
       do
       {
         cout << "Presiona 1 para volver al menu principal:";
         cin >> resp;
+        cout << endl;
+
       } while (resp != 1);
       break;
     case 3:
-      cout << "Este juego se basa en la toma de decisiones criticas que determinaran" << endl;
-      cout << "el final de la historia. Lee cuidadosamente la historia y las situaciones presentadas." << endl;
-      cout << "Se te presentaran opciones en momentos clave." << endl;
-      cout << "Usa el teclado para seleccionar la opcion que desees" << endl;
-      cout << "Cada decision afectara el desarrollo de la historia y el destino de los personajes." << endl;
-      cout << "Hay multiples finales posibles basados en tus decisiones." << endl;
-      cout << "Buena suerte y elige sabiamente!" << endl;
+     cout << "\033[94m <Como jugar/>    \033[0m\n" << endl;
+     cout << "\033[94m Este juego se basa en la toma de decisiones criticas que determinaran    \033[0m\n";
+     cout << "\033[94m el final de la historia. Lee cuidadosamente la historia y las situaciones presentadas.    \033[0m\n";
+     cout << "\033[94m Se te presentaran opciones en momentos clave.    \033[0m\n";
+     cout << "\033[94m Usa el teclado para seleccionar la opcion que desees   \033[0m\n";
+     cout << "\033[94m Cada decision afectara el desarrollo de la historia y el destino de los personajes.    \033[0m\n";
+     cout << "\033[94m Hay multiples finales posibles basados en tus decisiones.   \033[0m\n";
+     cout << "\033[94m Buena suerte y elige sabiamente!    \033[0m\n";
       cout << endl;
       do
       {
         cout << "Presiona 1 para volver al menu principal:";
         cin >> resp;
+        cout << endl;
       } while (resp != 1);
 
       break;
     case 4:
-      cout << "Gracias por jugar a nuestro juego" << endl;
+
+    cout << "\033[91mGracias por jugar a nuestro juego\033[0m\n" << endl;
+      cout << "" << endl;
       cout << endl;
       return 0;
       break;
