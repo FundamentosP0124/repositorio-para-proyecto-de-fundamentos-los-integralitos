@@ -16,7 +16,7 @@ int main()
   _getch();
   int numale = 0;                                                   // Numero aleatorio
   int resp;                                                         /*Variable para volver al menu principal*/
-  int j1vida = 100, j2vida = 100, limitedias = 10, contadordia = 0; // La vida de los jugadores, limite de dias y contador de dias
+  int j1vida = 100, j2vida = 100, limitedias = 7, contadordia = 1, contadorswitch=1; // La vida de los jugadores, limite de dias y contador de dias
   bool turno = true;                                                // Son los turnos de cada jugador
   string jugador1, jugador2;                                        /*variables para almacenar los nombres de los jugadores*/
   int desicion = 0, desicionp = 0;                                               // Para tomar deciciones dentro del juego
@@ -87,12 +87,13 @@ int main()
 
       do
       {
-        if (contadordia == 0)
+        if (contadordia == 1)
         { // Contador de dias
           cout << "\t===============" << endl;
           cout << "\t    Dia 1\n";
           cout << "\t===============" << endl;
           contadordia++;
+          
         }
         else if (turno == true)
         {
@@ -100,12 +101,13 @@ int main()
           cout << "\tDia " << contadordia << "\n";
           cout << "\t===============\n";
           contadordia++;
+      
         }
         switch (turno)
         {
         case true:
 
-          switch (contadordia)
+          switch (contadorswitch)
           {
           case 1:
             cout << "Luego de la caida del avion tu " << jugador1 << " apesar de algunos golpes y heridas te encuentras bien\n";
@@ -274,7 +276,7 @@ int main()
           break;
           // Aqui va todo el codigo del juador 1, el cout es namas para ver si funcionaba lo de los turnes jeje
         case false:
-          switch (contadordia)
+          switch (contadorswitch)
           {
           case 1:
             cout << "A\n";
@@ -310,6 +312,7 @@ int main()
         if (turno == true)
         { // Para los turnos como un turno se gasta cuando pasan los dos jugadores entonces deben de jugar los dos para poder pasar un turno
           limitedias--;
+          contadorswitch++;
         }
 
       } while (j1vida != 0 && j2vida != 0 && limitedias != 0);
