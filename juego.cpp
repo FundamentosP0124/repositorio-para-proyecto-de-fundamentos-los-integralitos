@@ -7,13 +7,14 @@ using namespace std;
 
 
 
-int numrand(); // Declaracion de funcion de numero aleatorio
+int numrand(int); // Declaracion de funcion de numero aleatorio
 int main()
 {
   
   cout << "Pulsa cualquier letra para comenzar..." << endl
        << endl;
   _getch();
+  int limitealeatorio = 0;
   int numale = 0;                                                   // Numero aleatorio
   int resp;                                                         /*Variable para volver al menu principal*/
   int j1vida = 100, j2vida = 100, limitedias = 7, contadordia = 1, contadorswitch=1; // La vida de los jugadores, limite de dias y contador de dias
@@ -32,7 +33,8 @@ int main()
     cout << "\033[106;97m > 1.....Iniciar juego \033[0m\n" << endl;
     cout << "\033[103;97m > 2.....Historia      \033[0m\n" << endl;
     cout << "\033[104;97m > 3.....Como jugar    \033[0m\n" << endl;
-    cout << "\033[101;97m > 4.....Salir         \033[0m\n" << endl;
+    cout << "\033[104;97m > 4.....Creditos      \033[0m\n" <<endl;
+    cout << "\033[101;97m > 5.....Salir         \033[0m\n" << endl;
     do
     {
       cout << "Digita tu opcion: ";
@@ -158,7 +160,8 @@ int main()
                 } while (desicion != 1 && desicion != 2);
                 if (desicion == 1)
                 {
-                  numale = numrand();
+                  limitealeatorio = 3;
+                  numale = numrand(limitealeatorio);
                   switch (numale)
                   {
                   case 1:
@@ -180,7 +183,7 @@ int main()
                 cout << "Afortunadamente encuentras una cueva cerca de el avion asi que decides descansar ahi\n";
               }
               else
-            {
+              {
               cout << "Te adentras en el bosque y te topas con una cabana, decides entrar pues parece estar abandonada\n";
               cout << "Adentro encuentras un lugar sucio pero sigue siendo mejor que dormir en la tierra humeda del bosque\n";
               cout << "Mientras miras con desden y melancolia una esquina donde parece haber una rata muerta, logras diferenciar una escotilla en el suelo\n";
@@ -198,7 +201,8 @@ int main()
               if (desicion == 1)
               {
                 cout << "Bajas con cuidado las escaleras, sin embargo, la suerte no parece estar de tu lado y uno de los escalones se rompe y caes por las escaleras\n";
-                numale = numrand();
+                limitealeatorio = 3;
+                numale = numrand(limitealeatorio);
                 switch (numale)
                 {
                 case 1:
@@ -226,7 +230,8 @@ int main()
                 } while (desicion != 1 && desicion != 2);
                 if (desicion == 1)
                 {
-                  numale = numrand();
+                  limitealeatorio = 3;
+                  numale = numrand(limitealeatorio);
                   switch (numale)
                   {
                   case 1:
@@ -245,15 +250,86 @@ int main()
                 cout << "Quitas tu atencion de la escotilla y vuelves a mirar a lo que parecia una rata muerta, pero ya no esta\n";
                 cout << "Eso te parece estrano pero no le distes importancia\n";
               }
-              cout << "Ves la sucia cama de la cabana pero decides acostarte y pasar la noche en el lugar\n";
-            }
+            cout << "Ves la sucia cama de la cabana pero decides acostarte y pasar la noche en el lugar\n";
 
             cout <<"Quieres ver tu inventario?  y/n" << endl;
             
-             //fin del dia 1
-              
+             //fin del dia   
             }
-            
+            }else{
+            cout<<"Te dirijes al este y te adentras en el bosque, a los minutos de caminata te topas con las ruinas de un castillo\n";
+            do{
+            cout<<"Quieres entrar a explorar?\n";
+            cout<<"\n1. Claro por que si\n"<<"2. Mejor sigo avanzando\n";
+            if (desicion != 1 && desicion != 2)
+              {
+                cout << "Favor elija una de las opciones disponibles\n";
+              }
+            }while(desicion !=1 && desicion != 2);
+            if(desicion==1){
+              cout<<"Ingresas al castillo y estando ahi ves una puerta entre abierta, te asomas y ves una bodega polvosa\n";
+              cout<<"Quieres entrar a revisar?\n";
+              do{
+                cout<<"1. Podria haber algo util en esa bodega\n"<<"2. Se ve viejo y polvoso, no parece haber nada util\n";
+                if (desicionp != 1 && desicionp != 2)
+              {
+                cout << "Favor elija una de las opciones disponibles\n";
+              }
+              }while(desicion != 1 && desicion != 2);
+              if(desicion==1){
+                cout<<"Ingresas en la bodega oscura, no puedes ver nada pero sientes un olor a viejo y polvo\n";
+                cout<<"Logras agarrar algo en medio de la obscuridad, no sabes muy bien lo que es\n";
+              limitealeatorio = 3;
+                numale = numrand(limitealeatorio);
+                switch (numale)
+                {
+                  case 1: 
+                  cout<<"Sacas un cuchillo\n";
+                  break;
+                  case 2:
+                  cout<<"Sacas ropa\n";
+                  break;
+                  case 3:
+                  cout<<"Sacas una mota de polvo enorme\n";
+                }
+              }else{
+                cout<<"Ignoras la bodega y sigues con tu camino\n";
+              }
+              cout<<"Te das cuenta que ese castillo puede servir de refugio para pasar la noche, asi que decides quedarte ahi\n";
+            }else{
+              cout<<"Sigues avanzando hasta llegar a un lago\n";
+              cout<<"Cerca del lago se ve una casa de madera con muelle al lago\n";
+              cout<<"Quieres explorar la casa\n";
+              do{
+                cout<<"1. Veamos que hay adentro\n"<<"2. Mejor veo el lago\n";
+                if (desicionp != 1 && desicionp != 2)
+              {
+                cout << "Favor elija una de las opciones disponibles\n";
+              }
+              }while(desicion!=1&&desicion!=2);
+              if(desicion==1){
+                cout<<"Ingresas en la casa y ves que esta abandonada, (Lo concluyes por el estado deplorable del lugar)\n";
+                cout<<"Ves en la pered una hacha, esta puede ser util para despues\n";
+                cout<<"Deseas llevarte el hacha?\n";
+                do{
+                cout<<"1. Parece una buena idea\n"<<"2. Solo me va a estorbar\n";
+                if (desicionp != 1 && desicionp != 2)
+              {
+                cout << "Favor elija una de las opciones disponibles\n";
+              }
+                }while(desicion!=1&&desicion!=2);
+                if(desicion==1){
+                  cout<<"Agarras el hachas\n"; //Aqui agarra un hacha
+                }else{
+                  cout<<"Solo pasas de largo\n";
+                }
+               cout<<"Por el cansancio de la caminata te sientas a esperar en el muelle viendo el lago hasta que anochece\n";
+              }else{
+                cout<<"Te quedas viendo el lago....\n";
+                cout<<"Hasta que anochece y te metes en la casa, ya que no tienes otro lugar donde ir\n";
+              }
+            } cout<<"En la casa te acuestas en la cama a pesar de estar sucia y esperas hasta dormir\n";
+            }
             break;
           case 2:
             cout << "b\n";
@@ -353,6 +429,10 @@ int main()
 
       break;
     case 4:
+    cout<<"Creditos\n";
+    cout<<"Daniel Alexander Ayala Escobar 00045824\n";  
+    break;
+    case 5:
 
     cout << "\033[91mGracias por jugar a nuestro juego\033[0m\n" << endl;
       cout << "" << endl;
@@ -365,10 +445,10 @@ int main()
   return 0;
 }
 
-int numrand()
+int numrand(int limitealatorio)
 { // Funcion para numero aleatorio
   int dato = 0;
   srand(time(NULL));
-  dato = 1 + rand() % (3);
+  dato = 1 + rand() % (limitealatorio);
   return dato;
 }
