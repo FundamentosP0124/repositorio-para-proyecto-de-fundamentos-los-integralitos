@@ -7,13 +7,14 @@ using namespace std;
 
 
 
-int numrand(); // Declaracion de funcion de numero aleatorio
+int numrand(int); // Declaracion de funcion de numero aleatorio
 int main()
 {
   
   cout << "Pulsa cualquier letra para comenzar..." << endl
        << endl;
   _getch();
+  int limitealeatorio = 0;
   int numale = 0;                                                   // Numero aleatorio
   int resp;                                                         /*Variable para volver al menu principal*/
   int j1vida = 100, j2vida = 100, limitedias = 7, contadordia = 1, contadorswitch=1; // La vida de los jugadores, limite de dias y contador de dias
@@ -32,7 +33,8 @@ int main()
     cout << "\033[106;97m > 1.....Iniciar juego \033[0m\n" << endl;
     cout << "\033[103;97m > 2.....Historia      \033[0m\n" << endl;
     cout << "\033[104;97m > 3.....Como jugar    \033[0m\n" << endl;
-    cout << "\033[101;97m > 4.....Salir         \033[0m\n" << endl;
+    cout << "\033[104;97m > 4.....Creditos      \033[0m\n" <<endl;
+    cout << "\033[101;97m > 5.....Salir         \033[0m\n" << endl;
     do
     {
       cout << "Digita tu opcion: ";
@@ -158,7 +160,8 @@ int main()
                 } while (desicion != 1 && desicion != 2);
                 if (desicion == 1)
                 {
-                  numale = numrand();
+                  limitealeatorio = 3;
+                  numale = numrand(limitealeatorio);
                   switch (numale)
                   {
                   case 1:
@@ -198,7 +201,8 @@ int main()
               if (desicion == 1)
               {
                 cout << "Bajas con cuidado las escaleras, sin embargo, la suerte no parece estar de tu lado y uno de los escalones se rompe y caes por las escaleras\n";
-                numale = numrand();
+                limitealeatorio = 3;
+                numale = numrand(limitealeatorio);
                 switch (numale)
                 {
                 case 1:
@@ -226,7 +230,8 @@ int main()
                 } while (desicion != 1 && desicion != 2);
                 if (desicion == 1)
                 {
-                  numale = numrand();
+                  limitealeatorio = 3;
+                  numale = numrand(limitealeatorio);
                   switch (numale)
                   {
                   case 1:
@@ -353,6 +358,10 @@ int main()
 
       break;
     case 4:
+    cout<<"Creditos\n";
+    cout<<"Daniel Alexander Ayala Escobar 00045824\n";  
+    break;
+    case 5:
 
     cout << "\033[91mGracias por jugar a nuestro juego\033[0m\n" << endl;
       cout << "" << endl;
@@ -365,10 +374,10 @@ int main()
   return 0;
 }
 
-int numrand()
+int numrand(int limitealatorio)
 { // Funcion para numero aleatorio
   int dato = 0;
   srand(time(NULL));
-  dato = 1 + rand() % (3);
+  dato = 1 + rand() % (limitealatorio);
   return dato;
 }
