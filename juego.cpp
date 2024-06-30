@@ -113,7 +113,7 @@ int main()
           {
           case 1:
             cout << "Luego de la caida del avion tu " << jugador1 << " apesar de algunos golpes y heridas te encuentras bien\n";
-            cout << "Ves humo a lo lejos viniendo de dos direcciones distantes a donde deberias ir ahora al humo que se ve al norte o el humo que se ve al este?\n";
+            cout << "Ves humo a lo lejos viniendo de dos direcciones distantes a donde deberias ir ahora, al humo que se ve al norte o adentrarse en el bosque al este?\n";
             do
             {
               cout << "1. Al norte\n"
@@ -250,9 +250,9 @@ int main()
                 cout << "Quitas tu atencion de la escotilla y vuelves a mirar a lo que parecia una rata muerta, pero ya no esta\n";
                 cout << "Eso te parece estrano pero no le distes importancia\n";
               }
-            cout << "Ves la sucia cama de la cabana pero decides acostarte y pasar la noche en el lugar\n";
+              cout << "Ves la sucia cama de la cabana pero decides acostarte y pasar la noche en el lugar\n";
 
-            cout <<"Quieres ver tu inventario?  y/n" << endl;
+              cout <<"Quieres ver tu inventario?  y/n" << endl;
             
              //fin del dia   
             }
@@ -261,6 +261,7 @@ int main()
             do{
             cout<<"Quieres entrar a explorar?\n";
             cout<<"\n1. Claro por que si\n"<<"2. Mejor sigo avanzando\n";
+            cin>>desicion;
             if (desicion != 1 && desicion != 2)
               {
                 cout << "Favor elija una de las opciones disponibles\n";
@@ -271,6 +272,7 @@ int main()
               cout<<"Quieres entrar a revisar?\n";
               do{
                 cout<<"1. Podria haber algo util en esa bodega\n"<<"2. Se ve viejo y polvoso, no parece haber nada util\n";
+                cin>>desicion;
                 if (desicionp != 1 && desicionp != 2)
               {
                 cout << "Favor elija una de las opciones disponibles\n";
@@ -302,7 +304,8 @@ int main()
               cout<<"Quieres explorar la casa\n";
               do{
                 cout<<"1. Veamos que hay adentro\n"<<"2. Mejor veo el lago\n";
-                if (desicionp != 1 && desicionp != 2)
+                cin>> desicion;
+                if (desicion != 1 && desicion != 2)
               {
                 cout << "Favor elija una de las opciones disponibles\n";
               }
@@ -313,7 +316,8 @@ int main()
                 cout<<"Deseas llevarte el hacha?\n";
                 do{
                 cout<<"1. Parece una buena idea\n"<<"2. Solo me va a estorbar\n";
-                if (desicionp != 1 && desicionp != 2)
+                cin>>desicion;
+                if (desicion != 1 && desicion != 2)
               {
                 cout << "Favor elija una de las opciones disponibles\n";
               }
@@ -355,7 +359,146 @@ int main()
           switch (contadorswitch)
           {
           case 1:
-            cout << "A\n";
+            cout << "Luego de la estrepitosa caida desde el avion tu,"<<jugador2<<" te levantas con dolor y con algunas heridas, pero nada grave\n";
+            cout << "Luego de un rato ves a lo lejos en direccion al sur una columna de humno\n";
+            cout<< "A donde quieres ir? Al Sur a ver la columna de humo, o dirigirse a la playa\n";
+            do{
+            cout<< "1. Al sur \n"<<"2. A la playa\n";
+            cin>>desicionp;
+            if (desicionp != 1 && desicionp != 2)
+                {
+                  cout << "Favor elija una de las opciones disponibles\n";
+                }
+            }while(desicionp != 1 && desicionp != 2);
+            if(desicionp==1){
+              cout<<"Te dirijes al sur y encuentras la cola del avion, parce haber cosas utiles dentro\n";
+              cout<<"Deceas entrar a la cola del avion o prefieres adentrarte en el bosque\n";
+              do{
+                cout<<"1. Veamos que hay adentro\n"<<"2. Mejor no, adentremonos en el bosque\n";
+                cin>>desicion;
+                if (desicion != 1 && desicion != 2)
+                {
+                  cout << "Favor elija una de las opciones disponibles\n";
+                }
+              }while(desicion != 1 && desicion != 2);
+              if(desicion==1){
+               cout<<"Te adentras en la cola del avion\n";
+               cout<<"Encuentras un poco de comida y agua, ademas de los cuerpos de los pasajeros del avion\n";
+               cout<<"Al fondo encuentras una caja parece tener buenas cosas dentros\n";
+               cout<<"Deseas abrirla?\n";
+               do{
+                 cout<<"1.Claro que si\n"<<"2. Nah\n";
+                 cin>>desicion;
+                 if (desicion != 1 && desicion != 2)
+                {
+                  cout << "Favor elija una de las opciones disponibles\n";
+                }
+               }while(desicion != 1 && desicion != 2);
+               if(desicion==1){
+                limitealeatorio=3;
+                numale=numrand(limitealeatorio);
+                switch(numale){
+                  case 1: 
+                  cout<<"Encontrastes un botiquin\n";
+                  break;
+                  case 2:
+                  cout<<"Encontrastes un cuchillo\n";
+                  break;
+                  case 3:
+                  cout<<"Encontrastes una radio\n";
+                  break;
+                }
+               }else{
+                cout<<"Sigues con tu camino\n";
+               }
+               cout<<"Sales del avion y ves que esta anocheciendo, asi que te quedas en el avion para pasar la noche\n";
+              }else{
+                cout<<"Te adentras en el bosque y caminas por unos minutos\n";
+                cout<<"A los lejos te encuentras una aldea con unas cuantas chozas, entras para ver si hay algo util\n";
+                cout<<"Al entrar vez una choza mas grande bajando una colina\n"<<"Quieres ver que hay en la choza grandre bajando la colina o ver las chozas a tus alrededores\n";
+                do{
+                  cout<<"1. Veamos que hay en la choza grande\n"<<"2. Parece inseguro bajar, mejor veamos las chozas a mi alrededor\n";
+                  cin>>desicion;
+                  if (desicion != 1 && desicion != 2)
+                {
+                  cout << "Favor elija una de las opciones disponibles\n";
+                }
+                }while(desicion != 1 && desicion != 2);
+                if(desicion==1){
+                  cout<<"Bajas para ver la choza, en su interior ves una cama y unas cuantas cajas que parecen haber sido abandonada hace tiempo\n";
+                  cout<<"Al fondo ves una caja que parece estar bloqueada por un tozo de madera caido\n";
+                  cout<<"Parece algo pesado el levantar el tozo de madera, deseas levantarlo\n";
+                  do{
+                    cout<<"1. Quiero ver que hay dentro, lo levantare\n"<<"2 .Mejor no podria lastimarme\n";
+                    cin>>desicion;
+                    if (desicion != 1 && desicion != 2)
+                {
+                  cout << "Favor elija una de las opciones disponibles\n";
+                }
+                  }while(desicion != 1 && desicion != 2);
+                  if(desicion==1){
+                    limitealeatorio = 2;
+                    numale = numrand(limitealeatorio);
+                    switch(numale){
+                      case 1:
+                      cout<<"Logras levantas la madera y ves lo que hay adentro\n";
+                      limitealeatorio = 2;
+                      numale = numrand(limitealeatorio);
+                      switch(numale){
+                        case 1:
+                        cout<<"Encontrastes un cuchillo\n";
+                        break;
+                        case 2:
+                        cout<<"Encontrastes un bate\n";
+                        break;
+                      }
+                      break;
+                      case 2:
+                      cout<<"Intentas levantar la madera, pero no la logras levantar y te caes\n";
+                      cout<<"Te lastimas el tobillo, no es grave pero te impedira moverte agilmente\n";
+                      j2esguince = true;
+                    }
+                  }else{
+                    cout<<"Ignoras la caja y sigues explorando\n";
+                  }
+                  cout<<"Luego exploras pero no encuentras nada util\n";
+                  cout<<"Como empieza a anochecer decides pasar la noche en la choza\n";
+                }else{
+                  cout<<"Investigas las chozas que hay alrededor\n";
+                  cout<<"Al ingresar a varias chozas encuentras pocas cosas utiles, solo un poco de comida y agua\n";
+                  cout<<"Ves una choza que parece estar bloqueada en la entrada\n";
+                  cout<<"Parece que puedes entrar por una ventana pero tienes que romper una ventana\n";
+                  cout<<"Quieres intentar entrar?\n";
+                  do{
+                   cout<<"1. Con un golpe se puede romper la ventana para entrar\n"<<"2. Me podria lastimar\n";
+                   cin>>desicion;
+                   if (desicion != 1 && desicion != 2)
+                {
+                  cout << "Favor elija una de las opciones disponibles\n";
+                }
+                  }while(desicion != 1 && desicion != 2);
+                  if(desicion==1){
+                    limitealeatorio = 2;
+                    numale = numrand(limitealeatorio);
+                    switch(numale){
+                      case 1:
+                      cout<<"Golpeas la ventana y te cortas la mano\n";
+                      j2cortada = true;
+                      break;
+                      case 2:
+                      cout<<"Golpeas la ventana y milagrosamente no te pasa nada\n";
+                      break;
+                    }
+                    cout<<"Entras y encuentras un botiquin\n";
+                  }else{
+                    cout<<"Continuas explorando y encuentras una choza mas o menos en buen estado y decides pasar la noche ahi\n";
+                  }
+                }
+              }
+            }else{
+              
+            }
+
             break;
           case 2:
             cout << "b\n";
