@@ -496,7 +496,22 @@ int main()
                 }
               }
             }else{
+              cout<<"Te dirijes a la playa\n";
+              cout<<"En la playa te encuentras unos cuantos cocos para comer\n";
+              cout<<"Caminando un rato en la orilla de la playa ves un yate naufragueado\n";
+              cout<<"Quieres ver el barco o mejor sigues caminando por la playa\n";
+              do{
+               cout<<"1. Veamos que hay adentro\n"<<"2. Mejor no, sigamos avanzando\n";
+               cin>>desicion;
+               if(desicion != 1 && desicion != 2){
+                cout << "Favor elija una de las opciones disponibles\n";
+               }
+              }while(desicion != 1 && desicion != 2);
+              if(desicion==1){
+                cout<<"Entras a la cabina del yate donde encuentras algunas prendas y agua\n";
+                cout<<"Intentas encender el yate pero este parece estar descompuesto\n";
               
+              }
             }
 
             break;
