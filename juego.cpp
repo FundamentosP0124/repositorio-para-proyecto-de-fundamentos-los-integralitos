@@ -108,6 +108,7 @@ int main()
         switch (turno)
         {
         case true:
+        cout<<"\n\nTurno jugador 1\n";
 
           switch (contadorswitch)
           {
@@ -356,6 +357,7 @@ int main()
           break;
           // Aqui va todo el codigo del juador 1, el cout es namas para ver si funcionaba lo de los turnes jeje
         case false:
+        cout<<"\n\nTurno Jugador 2\n";
           switch (contadorswitch)
           {
           case 1:
@@ -510,7 +512,87 @@ int main()
               if(desicion==1){
                 cout<<"Entras a la cabina del yate donde encuentras algunas prendas y agua\n";
                 cout<<"Intentas encender el yate pero este parece estar descompuesto\n";
-              
+                cout<<"Exploras al rededor del yate y encuentras el equipaje de los que iban en el yate\n";
+                cout<<"No obstante este parece haber caido en una zona con muchas rocas, podria ser peligroso intentar llegar a ellas\n";
+                cout<<"Deceas intentar agarrarlas?\n";
+                do{
+                  cout<<"1. Intentare llegar ahi\n"<<"2. Mejor no, podria lastimarme\n";
+                  cin>>desicion;
+                  if (desicion != 1 && desicion != 2)
+                {
+                  cout << "Favor elija una de las opciones disponibles\n";
+                }
+                }while(desicion != 1 && desicion != 2);
+                if(desicion==1){
+                  limitealeatorio=2;
+                  numale = numrand(limitealeatorio);
+                  switch(numale){
+                    case 1:
+                    cout<<"Alcanzas llegar a el equipaje sin complicaciones\n";
+                    break;
+                    case 2:
+                    cout<<"Intentas llegar pero justo cuando esabas por alcanzar el equipaje te doblas el tobillo\n";
+                    j2esguince = true;
+                    break;
+                  }
+                  cout<<"Al abrir la caja\n";
+                  limitealeatorio = 3;
+                  numale = numrand(limitealeatorio);
+                  switch(numale){
+                     case 1:
+                     cout<<"Encontrastes un hacha\n";
+                     break;
+                     case 2:
+                     cout<<"Encontrastes un botiquin\n";
+                     break;
+                     case 3:
+                     cout<<"No encontrastes nada\n";
+                     break;
+                  }
+                }else{
+                  cout<<"Sigues tu camino\n";
+                }
+                cout<<"Despues de un rato explorando entras en el yate al ver que esta anocheciendo, y decides pasar la noche ahi\n";
+              }else{
+                cout<<"Sigues avanzando un rato y llegas a un lugar de la playa donde parece haber sido donde cayo una parte del equipaje del avion\n";
+                cout<<"Revisas los equipajes pero mas alla de algo de comida y agua no encuentras nada util\n";
+                cout<<"Luego de un rato revisado maletas ves un maletin que tiene un candado, Deseas intentar abrirlo con fuerza bruta y una piedra?\n";
+                do{
+                cout<<"1. Intentemos aver que pasa\n"<<"2. Mejor no, me podria lastimas las manos\n";
+                cin>>desicion;
+                if (desicion != 1 && desicion != 2)
+                {
+                  cout << "Favor elija una de las opciones disponibles\n";
+                }
+                }while(desicion != 1 && desicion != 2);
+                if(desicion==1){
+                 limitealeatorio = 2;
+                 numale = numrand(limitealeatorio);
+                 switch(numale){
+                  case 1:
+                  cout<<"Al intentar abrir el maletin con la piedra, terminas hacindote una cortada, parce que la piedra tenia un lado contante\n";
+                  j2cortada = true;
+                  break;
+                  case 2:
+                  cout<<"Golpeas el candado con la piedra y logras romperlo\n";
+                   limitealeatorio = 3;
+                   numale = numrand(limitealeatorio);
+                   switch(numale){
+                      case 1:
+                      cout<<"Encontraste una radio\n";
+                      break;
+                      case 2:
+                      cout<<"Encontrastes un botiquin\n";
+                      break;
+                      case 3:
+                      cout<<"Encontrastes mucho dinero, no creo que te sea muy util en una isla desavitada\n";
+                      break;
+                   }
+                 }
+                }else{
+                 cout<<"Dejas la maleta y prestas tu atencion en un cangrejo que andaba por ahi\n";
+                }
+                cout<<"Continuas caminando hasta que encuentras una cueva, aunque parece humeda decides quedarte a pasar la noche ahi\n";
               }
             }
 
