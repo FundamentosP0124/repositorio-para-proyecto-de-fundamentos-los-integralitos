@@ -3,7 +3,7 @@
 #include <string>
 #include <time.h>
 #include <cstdio>
-#include <unistd.h> // Para usleep en sistemas Unix-like (Linux, macOS)
+#include <unistd.h> 
 
 using namespace std;
 
@@ -407,12 +407,16 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
            } while (invt != 'y' && invt != 'n');
 
                if (invt == 'y') {
-                    cout << "Inventario de " << jugador1 << ": ";
-                    for (int i = 0; i < objetosRecolectados1; i++) {
-                        cout << inventarioJugador1[i] << (i < objetosRecolectados1 - 1 ? ", " : "");
-                    }
-                    cout << endl;
-               }
+        if (objetosRecolectados1 == 0) {
+            cout << "El inventario esta vacio." << endl;
+        } else {
+            cout << "Inventario de " << jugador1 << ": ";
+            for (int i = 0; i < objetosRecolectados1; i++) {
+                cout << inventarioJugador1[i] << (i < objetosRecolectados1 - 1 ? ", " : "");
+            }
+            cout << endl;
+        }
+    }
           
             break;
           case 2:
@@ -705,15 +709,16 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
            } while (invt != 'y' && invt != 'n');
 
                if (invt == 'y') {
-                    cout << "Inventario de " << jugador2 << ": ";
-                    for (int i = 0; i < objetosRecolectados2; i++) {
-                        cout << inventarioJugador2[i] << (i < objetosRecolectados2 - 1 ? ", " : "");
-                    }
-                    cout << endl;
-               }
-
-
-
+        if (objetosRecolectados2 == 0) {
+            cout << "El inventario esta vacio." << endl;
+        } else {
+            cout << "Inventario de " << jugador2 << ": ";
+            for (int i = 0; i < objetosRecolectados2; i++) {
+                cout << inventarioJugador2[i] << (i < objetosRecolectados2 - 1 ? ", " : "");
+            }
+            cout << endl;
+        }
+    }
 
 
             break;
