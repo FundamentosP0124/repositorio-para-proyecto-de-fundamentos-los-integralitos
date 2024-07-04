@@ -7,7 +7,22 @@
 
 using namespace std;
 
+//Declaracion de funciones DIA 2
+void Evento1Dia2();
+void Dia2();
 
+//Declaracion de funciones DIA 3
+void explorarRecursos();
+void BuscarComida();
+void Pantano();
+void Cueva();
+void Capitulo3();
+
+bool tieneCuchillo=false;
+bool AyudarZorro=false;
+char decision;
+int Arena;
+bool Radio=false;
 
 int numrand(int); // Declaracion de funcion de numero aleatorio
 void mostrarBarraDeCarga(int progreso, int total) {
