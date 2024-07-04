@@ -7,22 +7,7 @@
 
 using namespace std;
 
-//Declaracion de funciones DIA 2
-void Evento1Dia2();
-void Dia2();
 
-//Declaracion de funciones DIA 3
-void explorarRecursos();
-void BuscarComida();
-void Pantano();
-void Cueva();
-void Capitulo3();
-
-bool tieneCuchillo=false;
-bool AyudarZorro=false;
-char decision;
-int Arena;
-bool Radio=false;
 
 int numrand(int); // Declaracion de funcion de numero aleatorio
 void mostrarBarraDeCarga(int progreso, int total) {
@@ -67,10 +52,6 @@ int main()
   string inventarioJugador2[10];  //inventario para el jugdaor 2
   int objetosRecolectados1 = 0;
   int objetosRecolectados2 = 0;
-   
-
-   
-
 
 
   // Estado fisico de los jugadores
@@ -409,19 +390,14 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
             cout << "Quieres ver tu inventario? (y/n): ";
             cin >> invt;
            } while (invt != 'y' && invt != 'n');
-            
-                 if (invt == 'y') {
-        if (objetosRecolectados1 == 0) {
-            cout << "El inventario esta vacio." << endl;
-        } else {
-            cout << "Inventario de " << jugador1 << ": ";
-            for (int i = 0; i < objetosRecolectados1; i++) {
-                cout << inventarioJugador1[i] << (i < objetosRecolectados1 - 1 ? ", " : "");
-            }
-            cout << endl;
-        }
-    }
 
+               if (invt == 'y') {
+                    cout << "Inventario de " << jugador1 << ": ";
+                    for (int i = 0; i < objetosRecolectados1; i++) {
+                        cout << inventarioJugador1[i] << (i < objetosRecolectados1 - 1 ? ", " : "");
+                    }
+                    cout << endl;
+               }
           
             break;
           case 2:
