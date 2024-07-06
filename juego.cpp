@@ -723,10 +723,10 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
 
             break;
           case 2:
-            cout << "hola 2\n";
+            Dia2();
             break;
           case 3:
-            cout << "C\n";
+            Capitulo3();
             break;
           case 4:
             cout << "D\n";
