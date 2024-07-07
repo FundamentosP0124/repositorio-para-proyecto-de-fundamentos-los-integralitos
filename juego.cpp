@@ -150,17 +150,20 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
       {
         if (contadordia == 1)
         { // Contador de dias
-          cout << "\t===============" << endl;
-          cout << "\t    Dia 1\n";
-          cout << "\t===============" << endl;
+         cout << "\033[1;35m" << "\t===============\n" << "\033[0m";
+         cout << "\033[1;32m\t     Dia 1\033[0m\n";
+         cout << "\033[1;35m" << "\t===============\n" << "\033[0m";
           contadordia++;
           
         }
         else if (turno == true)
         {
-          cout << "\t===============\n";
-          cout << "\tDia " << contadordia << "\n";
-          cout << "\t===============\n";
+          cout << endl << endl;
+          cout << "\033[1;35m" << "\t===============\n" << "\033[0m";
+          cout << "\033[1;32m" << "\t     Dia " << contadordia << "\033[0m" << "\n";
+          cout << "\033[1;35m" << "\t===============\n" << "\033[0m";
+          cout << endl << endl;
+
           contadordia++;
       
         }
@@ -436,7 +439,7 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
             Capitulo3();
             break;
           case 4:
-            cout << "D\n";
+            Dia4j1();
             break;
           case 5:
             cout << "E\n";
@@ -739,7 +742,7 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
             cout<<"Jojo";
             break;
           case 4:
-            cout << "D\n";
+            Dia4j2();
             break;
           case 5:
             cout << "E\n";
@@ -805,8 +808,9 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
       break;
     case 4:
      cout << "\033[94m <Creditos/>    \033[0m\n" << endl;
-     cout << "\033[94m Daniel Alexander Ayala Escobar 00045824    \033[0m\n" << endl;
+     cout << "\033[94m Daniel Alexander Ayala Escobar   00045824    \033[0m\n" << endl;
      cout << "\033[94m David Alessandro Ventura Montoya 00089724    \033[0m\n" << endl;
+     cout << "\033[94m Adrian Alexi Alvarado Melgar     00112624     \033[0m\n" << endl;
     cout << endl << endl;
      do
       {
