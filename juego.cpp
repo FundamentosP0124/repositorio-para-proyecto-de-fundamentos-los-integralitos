@@ -733,10 +733,17 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
 
             break;
           case 2:
+<<<<<<< HEAD
             cout<<"jeje";
             break;
           case 3:
             cout<<"Jojo";
+=======
+            Dia2();
+            break;
+          case 3:
+            Capitulo3();
+>>>>>>> c81e25e645ffd6ddf17ea0e3aacc11dd36c3930b
             break;
           case 4:
             cout << "D\n";
