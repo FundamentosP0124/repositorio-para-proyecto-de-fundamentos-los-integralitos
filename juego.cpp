@@ -4,8 +4,24 @@
 #include <time.h>
 #include <cstdio>
 #include <unistd.h> 
+#include <chrono>
+#include <thread>
 
 using namespace std;
+
+// Estado fisico de los jugadores
+  bool j1esguince = false, j2esguince = false, j1fractura = false, j2fractura = false, j1cortada = false, j2cortada = false;
+
+
+
+
+  string inventarioJugador1[10];  //inventario para el jugdaor 1
+  string inventarioJugador2[10];  //inventario para el jugdaor 2
+  int objetosRecolectados1 = 0;
+  int objetosRecolectados2 = 0;
+  string jugador1, jugador2;    /*variables para almacenar los nombres de los jugadores*/
+
+
 
 //Declaracion de funciones DIA 2
 void Evento1Dia2();
@@ -13,6 +29,12 @@ void Dia2();
 void FrutaMisteriosa();
 void RecolectarMateriales();
 void ConstruirRefugio();
+
+//DIA 2 J2
+void J2Capitulo2();
+
+//DIA 3 J2
+void J2Cap3();
 
 bool tieneLinterna = false;
 bool tieneMadera = false;
@@ -28,6 +50,12 @@ void Esqueleto();
 void Capitulo3();
 void CaminoOso();
 
+void Dia4j1();
+void Dia4j2();
+void playa();
+void bosque();
+void volvercamp();
+void boom();
 bool tieneCuchillo=false;
 bool AyudarZorro=false;
 char decision;
@@ -35,6 +63,20 @@ int Arena;
 bool Radio=false;
 
 int numrand(int); // Declaracion de funcion de numero aleatorio
+int numrand(int limitealatorio)
+{ // Funcion para numero aleatorio
+  int dato = 0;
+  srand(time(NULL));
+  dato = 1 + rand() % (limitealatorio);
+  return dato;
+}
+  int limitealeatorio = 0;
+  int numale = 0;                                                   // Numero aleatorio
+  int resp;                                                         /*Variable para volver al menu principal*/
+  int j1vida = 100, j2vida = 100, limitedias = 7, contadordia = 1, contadorswitch=1; // La vida de los jugadores, limite de dias y contador de dias
+  bool turno = true;                                                // Son los turnos de cada jugador
+  int desicion = 0, desicionp = 0;                                               // Para tomar deciciones dentro del juego
+
 void mostrarBarraDeCarga(int progreso, int total) {
     float percent = (float)progreso / total;
     int barWidth = 70;
@@ -56,7 +98,7 @@ int main()
     for (int i = 0; i <= total; ++i) {
         mostrarBarraDeCarga(i, total);
        
-        usleep(100000); 
+        usleep(1000); 
     }
     cout << endl;
   
@@ -64,29 +106,18 @@ int main()
   cout << "Pulsa cualquier letra para comenzar..." << endl
        << endl;
   _getch();
-  int limitealeatorio = 0;
-  int numale = 0;                                                   // Numero aleatorio
-  int resp;                                                         /*Variable para volver al menu principal*/
-  int j1vida = 100, j2vida = 100, limitedias = 7, contadordia = 1, contadorswitch=1; // La vida de los jugadores, limite de dias y contador de dias
-  bool turno = true;                                                // Son los turnos de cada jugador
-  string jugador1, jugador2;                                        /*variables para almacenar los nombres de los jugadores*/
-  int desicion = 0, desicionp = 0;                                               // Para tomar deciciones dentro del juego
+
 
   
-  string inventarioJugador1[10];  //inventario para el jugdaor 1
-  string inventarioJugador2[10];  //inventario para el jugdaor 2
-  int objetosRecolectados1 = 0;
-  int objetosRecolectados2 = 0;
 
 
-  // Estado fisico de los jugadores
-  bool j1esguince = false, j2esguince = false, j1fractura = false, j2fractura = false, j1cortada = false, j2cortada = false;
 
+  
   do /*Este do se conecta con el while de resp y sirve para volver al menu principal*/
   {
     int opcion;
 cout << "\033[95m  <Menu principal/>\033[0m" << endl << endl;
-cout << "\033[96m > 1.....Iniciar juego \033[0m\n" << endl;
+cout << "\033[96m > 1.....Iniciar juego \033[0m\n" << endl; 
 cout << "\033[93m > 2.....Historia      \033[0m\n" << endl;
 cout << "\033[90m > 3.....Como jugar    \033[0m\n" << endl;
 cout << "\033[94m > 4.....Creditos      \033[0m\n" << endl;
@@ -241,8 +272,8 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
                      inventarioJugador1[objetosRecolectados1++] = "cuchillo";
                     break;
                   case 3:
-                    cout << "Encontrastes un bate\n";
-                     inventarioJugador1[objetosRecolectados1++] = "bate";
+                    cout << "Encontrastes un botiquin\n";
+                     inventarioJugador1[objetosRecolectados1++] = "botiquin";
 
                     break;
                     /*Agregar al inventario lo que el switch elija*/
@@ -312,8 +343,9 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
                      inventarioJugador1[objetosRecolectados1++] = "fosforos";
                     break;
                   case 2:
-                    cout << "Encontrastes ropa calida\n";
+                    cout << "Encontrastes ropa calida y agua\n";
                      inventarioJugador1[objetosRecolectados1++] = "ropa calida";
+                     inventarioJugador1[objetosRecolectados1++] = "agua";
                   case 3:
                     cout << "Al abrir la caja una rata salto y salio hullendo, por suerte no te mordio, pero el susto nadie te lo quita\n";
                   }
@@ -326,6 +358,9 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
               {
                 cout << "Quitas tu atencion de la escotilla y vuelves a mirar a lo que parecia una rata muerta, pero ya no esta\n";
                 cout << "Eso te parece estrano pero no le distes importancia\n";
+                cout << "descepcionado comienzas a caminar dandole vueltas al cuarto donde caiste y encontraste unas botellas de agua";
+                     inventarioJugador1[objetosRecolectados1++] = "agua";
+                
               }
               cout << "Ves la sucia cama de la cabana pero decides acostarte y pasar la noche en el lugar\n";
 
@@ -736,10 +771,10 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
 
             break;
           case 2:
-            cout<<"jeje";
+            J2Capitulo2();
             break;
           case 3:
-            cout<<"Jojo";
+            J2Cap3();
             break;
           case 4:
             Dia4j2();
@@ -832,13 +867,7 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
   return 0;
 }
 
-int numrand(int limitealatorio)
-{ // Funcion para numero aleatorio
-  int dato = 0;
-  srand(time(NULL));
-  dato = 1 + rand() % (limitealatorio);
-  return dato;
-}
+
 
 //======================================================================CAP 2=========================================================================================================
 
@@ -870,12 +899,57 @@ int Linterna;
         if (Linterna == 1) {
             tieneLinterna = true;
             cout << "Has agarrado la linterna.\n";
+            inventarioJugador1[objetosRecolectados1++] = "linterna";
             cout << "Esta te sera util mas adelante, decides volver al refugio usandola y teniendo una mejor vision\n";
+            cout << "Con ayuda de la linterna te guias hasta el refugio y descansas\n";
+
+
+             char invt;
+            do
+            {
+            cout << "Quieres ver tu inventario? (y/n): ";
+            cin >> invt;
+           } while (invt != 'y' && invt != 'n');
+
+               if (invt == 'y') {
+        if (objetosRecolectados1 == 0) {
+            cout << "El inventario esta vacio." << endl;
+        } else {
+            cout << "Inventario de " << jugador1 << ": ";
+            for (int i = 0; i < objetosRecolectados1; i++) {
+                cout << inventarioJugador1[i] << (i < objetosRecolectados1 - 1 ? ", " : "");
+            }
+            cout << endl;
+        }
+    }
+
             break;
         } else if (Linterna == 2) {
             tieneLinterna = false;
             cout << "Decides no agarrar la linterna.\n";
-            cout << "Se te hace dificil volver a tu refugio pero luego de muchas horas lograste encontrar el camino.\n";
+            cout << "Se te hace dificil volver a tu refugio, luego de caminar a la detiva un poco encontraste un botiquin.\n";
+            inventarioJugador1[objetosRecolectados1++] = "botiquin";
+            cout << "Luego de un rato encontraste el camino correcto hacia tu refugio.\n";
+            cout << "Llegas demasiado cansado y te quedas dormido.\n";
+
+                     char invt;
+                        do
+                        {
+                        cout << "Quieres ver tu inventario? (y/n): ";
+                        cin >> invt;
+                      } while (invt != 'y' && invt != 'n');
+
+                          if (invt == 'y') {
+                    if (objetosRecolectados1 == 0) {
+                        cout << "El inventario esta vacio." << endl;
+                    } else {
+                        cout << "Inventario de " << jugador1 << ": ";
+                        for (int i = 0; i < objetosRecolectados1; i++) {
+                            cout << inventarioJugador1[i] << (i < objetosRecolectados1 - 1 ? ", " : "");
+                        }
+                        cout << endl;
+                    }
+                }
             break;
         } else {
             cout << "Opcion no valida, intenta nuevamente.\n";
@@ -907,21 +981,62 @@ void FrutaMisteriosa(){
                 case 1:
                     cout<<"Sigues avanzando a pesar de las alucinaciones. Ves un rio delante de ti.\n";
                     cout<<"1. Cruzar el rio.\n";
-                    cout<<"2. Buscar un lugar seguro cerca del río.\n";
+                    cout<<"2. Buscar un lugar seguro cerca del rio.\n";
                     cin>>FrutaMisteriosa3;
                     switch (FrutaMisteriosa3) {
                         case 1:
                             cout<<"Intentas cruzar el rio, pero la corriente es demasiado fuerte. Te arrastra y pierdes el conocimiento.\n";
-                            cout<<"Despiertas al otro lado del río, aun alucinando.\n";
+                            cout<<"Despiertas al otro lado del rio, aun alucinando.\n";
                             cout<<"1. Buscar un camino de vuelta al refugio.\n";
                             cout<<"2. Explorar la nueva area.\n";
                             cin>>FrutaMisteriosa4;
                             switch (FrutaMisteriosa4) {
                                 case 1:
-                                    cout<<"Encuentras el camino de vuelta al refugio después de muchas dificultades. Finalmente, te quedas dormido y las alucinaciones comienzan a desvanecerse.\n";
+                                    cout<<"Encuentras el camino de vuelta al refugio despues de muchas dificultades. Finalmente, te quedas dormido y las alucinaciones comienzan a desvanecerse.\n";
+                                      char invt;
+                        do
+                        {
+                        cout << "Quieres ver tu inventario? (y/n): ";
+                        cin >> invt;
+                      } while (invt != 'y' && invt != 'n');
+
+                          if (invt == 'y') {
+                    if (objetosRecolectados1 == 0) {
+                        cout << "El inventario esta vacio." << endl;
+                    } else {
+                        cout << "Inventario de " << jugador1 << ": ";
+                        for (int i = 0; i < objetosRecolectados1; i++) {
+                            cout << inventarioJugador1[i] << (i < objetosRecolectados1 - 1 ? ", " : "");
+                        }
+                        cout << endl;
+                    }
+                } 
+                                    
                                     break;
                                 case 2:
                                     cout<<"Exploras la nueva area y encuentras algunas hierbas que parecen aliviar las alucinaciones. Despues de un tiempo, te sientes mejor y decides volver al refugio.\n";
+                                    cout << "De camino al refugio encontraste un botiquin atorado en una rama de un arbusto, lo decides tomar y guardar" << endl;
+                                    inventarioJugador1[objetosRecolectados1++] = "linterna";
+                                    cout<<"Consigues volver al refugio y te quedas dormido.\n";
+                                  
+                        do
+                        {
+                        cout << "Quieres ver tu inventario? (y/n): ";
+                        cin >> invt;
+                      } while (invt != 'y' && invt != 'n');
+
+                          if (invt == 'y') {
+                    if (objetosRecolectados1 == 0) {
+                        cout << "El inventario esta vacio." << endl;
+                    } else {
+                        cout << "Inventario de " << jugador1 << ": ";
+                        for (int i = 0; i < objetosRecolectados1; i++) {
+                            cout << inventarioJugador1[i] << (i < objetosRecolectados1 - 1 ? ", " : "");
+                        }
+                        cout << endl;
+                    }
+                }
+                                  
                                     break;
                                 default:
                                     cout<<"Opcion no valida, intenta nuevamente.\n";
@@ -929,26 +1044,83 @@ void FrutaMisteriosa(){
                             }
                             break;
                         case 2:
-                            cout<<"Encuentras un lugar seguro cerca del río y decides descansar. Despues de un rato, las alucinaciones empiezan a desvanecerse.\n";
+                            cout<<"Encuentras un lugar seguro cerca del rio y decides descansar. Despues de un rato, las alucinaciones empiezan a desvanecerse.\n";
                             cout<<"Te diriges de vuelta al refugio y pasas el resto de la noche alli.\n";
+                              char invt;
+                        do
+                        {
+                        cout << "Quieres ver tu inventario? (y/n): ";
+                        cin >> invt;
+                      } while (invt != 'y' && invt != 'n');
+
+                          if (invt == 'y') {
+                    if (objetosRecolectados1 == 0) {
+                        cout << "El inventario esta vacio." << endl;
+                    } else {
+                        cout << "Inventario de " << jugador1 << ": ";
+                        for (int i = 0; i < objetosRecolectados1; i++) {
+                            cout << inventarioJugador1[i] << (i < objetosRecolectados1 - 1 ? ", " : "");
+                        }
+                        cout << endl;
+                    }
+                }
                             break;
                         default:
-                            cout<<"Opciin no valida, intenta nuevamente.\n";
+                            cout<<"Opcion no valida, intenta nuevamente.\n";
                             break;
                     }
                     break;
                 case 2:
                     cout<<"Te sientas y descansas un poco. Las alucinaciones comienzan a ser menos intensas.\n";
                     cout<<"Finalmente, te sientes lo suficientemente bien como para volver al refugio.\n";
+                    cout<<"No tardas mucho en encontrar tu tu refugio, al llegar te arrecuestas en una roca y te quedas dormido\n";
+                             char invt;
+                        do
+                        {
+                        cout << "Quieres ver tu inventario? (y/n): ";
+                        cin >> invt;
+                      } while (invt != 'y' && invt != 'n');
+
+                          if (invt == 'y') {
+                    if (objetosRecolectados1 == 0) {
+                        cout << "El inventario esta vacio." << endl;
+                    } else {
+                        cout << "Inventario de " << jugador1 << ": ";
+                        for (int i = 0; i < objetosRecolectados1; i++) {
+                            cout << inventarioJugador1[i] << (i < objetosRecolectados1 - 1 ? ", " : "");
+                        }
+                        cout << endl;
+                    }
+                }
                     break;
                 default:
-                    cout<<"Opciin no válida, intenta nuevamente.\n";
+                    cout<<"Opcion no valida, intenta nuevamente.\n";
                     break;
             }
             break;
         case 2:
             cout<<"Te quedas quieto y esperas a que pase el efecto de la fruta. Despues de un tiempo, las alucinaciones empiezan a desvanecerse.\n";
             cout<<"Finalmente, puedes volver al refugio sin problemas.\n";
+            cout<<"De vuelta en el refugio te quedas dormido y te tapas con unas hojas.\n";
+                     char invt;
+                        do
+                        {
+                        cout << "Quieres ver tu inventario? (y/n): ";
+                        cin >> invt;
+                      } while (invt != 'y' && invt != 'n');
+
+                          if (invt == 'y') {
+                    if (objetosRecolectados1 == 0) {
+                        cout << "El inventario esta vacio." << endl;
+                    } else {
+                        cout << "Inventario de " << jugador1 << ": ";
+                        for (int i = 0; i < objetosRecolectados1; i++) {
+                            cout << inventarioJugador1[i] << (i < objetosRecolectados1 - 1 ? ", " : "");
+                        }
+                        cout << endl;
+                    }
+                }
+                
             break;
         default:
             cout<<"Opcion no valida, intenta nuevamente.\n";
@@ -1064,6 +1236,34 @@ void Capitulo3(){
 
 //Toda la funcion explorar Recursos
 
+   void Esqueleto(){
+                cout << "Has encontrado un esqueleto, parece tener una nota.\n";
+                cout << "Nota: Estoy atrapado en este lugar inhospito y frio, sin ropa, sin comida, sin agua, solamente yo y mi capacidad de poder escribir a pesar de haber sobrevivido\n"; // Esta es la nota que contenia un esqueleto en un bote de la cueva
+                cout << "todos estos dias en este infierno, quien habria dicho que aquellos habitantes de esta isla tan alejada de todo serian unos completos enfermos.\n";
+                cout << "Tenia la esperanza de encontrar el tesoro que tanto se rumoreaba que habia aqui, pero parece que todo fue un fraude, incluso juraria que fue plan de estos habitantes\n";
+                cout << "Por si alguien logra ver esta nota, mis fuerzas para poder moverme se han acabado, pero si alguien esta en mi misma situacion y con un poco de fuerzas, he dejado las llaves de mi lancha\n";
+                cout << "En aquel lugar donde solia pasar mis tardes junto a estos seres, donde por un momento en mi inocencia crei que los humanos no eran tan crueles como lo imaginaba\n";
+                cout << "Fin de la nota.\n";
+                Radio=true;
+                cout << "Has encontrado: Radio\n";
+                cout << "Has quedado en shock y comienzas a asustarte con tu alrededor, tienes muchas preguntas, decides pasar la noche ahi ya que ha oscurecido y sera muy peligroso salir.";
+    }
+    void CaminoOso(){
+                cout << "Regresas de camino a tu nuevo refugio para llevar las proviciones que has recolectado\n";
+                cout << "Ves a lo lejos un animal grande y cafe que se esta moviendo con tranquilidad, se trata de un oso.\n";
+                cout << "Das un mal paso y el oso logra escucharte, este se acerca agresivamente hacia ti.\n";
+                if (AyudarZorro==true)
+                {
+                    cout<<"Oh sorpresa! Es el zorro que ayudaste anteriormente a escapar, ahora el te ayuda a ti distrayendo al oso para que tu puedas hacerlo, logras escapar, sin embargo entras a una cueva donde el oso no cabe para poder refugiarte.\n";
+                    Esqueleto();
+                }
+                else{
+                    cout<<"Logras escapar, pero has dejado tu comida para que el oso se distraiga, logras adentrarte a una cueva donde el oso no cabe para poder refugiarte, ves que la cueva mas grande de lo que aparenta.\n";
+                    Esqueleto();
+                }
+
+    }
+
 void explorarRecursos() {
     int opcion;
 
@@ -1093,7 +1293,10 @@ void explorarRecursos() {
 //Toda la funcion buscar comida (No le agrego funcion a los casos porque los tres son muy cortos)
 
 void BuscarComida() {
-    int opcionComida; int opcionSubirArbol; int opcionRaices; int opcionExplorar;
+    int opcionComida; 
+    int opcionSubirArbol; 
+    int opcionRaices; 
+    int opcionExplorar;
 
     cout << "Decides explorar el pantano en busca de comida.\n";
     cout << "Encuentras varias opciones para buscar:\n";
@@ -1103,12 +1306,12 @@ void BuscarComida() {
     cout << "Elige una opcion: ";
     cin >> opcionComida;
 
- switch (opcionComida) {
+    switch (opcionComida) {
         case 1:
             cout << "Intentas subir a un arbol para buscar frutas.\n";
             cout << "1. Subir lentamente y con cuidado\n";
             cout << "2. Subir rapidamente\n";
-            cout << "3. Buscar otro arbol que parezca más seguro\n";
+            cout << "3. Buscar otro arbol que parezca mas seguro\n";
             cin >> opcionSubirArbol;
 
             switch (opcionSubirArbol) {
@@ -1121,7 +1324,7 @@ void BuscarComida() {
                     CaminoOso();
                     break;
                 case 3:
-                    cout << "Encuentras otro arbol que parece más seguro y subes sin problemas. Recoges algunas frutas.\n";
+                    cout << "Encuentras otro arbol que parece mas seguro y subes sin problemas. Recoges algunas frutas.\n";
                     CaminoOso();
                     break;
                 default:
@@ -1135,16 +1338,16 @@ void BuscarComida() {
             cout << "Encuentras raices comestibles y las recolectas con cuidado.\n";
             cout << "1. Examinar las raices detenidamente antes de recolectarlas\n";
             cout << "2. Recolectarlas rapidamente\n";
-            cout << "3. Buscar más raices en el area\n";
+            cout << "3. Buscar mas raices en el area\n";
             cin >> opcionRaices;
 
             switch (opcionRaices) {
                 case 1:
-                    cout << "Examinar las raíces detenidamente te permite recolectar las mejores.\n";
+                    cout << "Examinar las raices detenidamente te permite recolectar las mejores.\n";
                     CaminoOso();
                     break;
                 case 2:
-                    cout << "Recolectas las raices rápidamente, pero algunas no son comestibles.\n";
+                    cout << "Recolectas las raices rapidamente, pero algunas no son comestibles.\n";
                     CaminoOso();
                     break;
                 case 3:
@@ -1169,26 +1372,32 @@ void BuscarComida() {
                 case 1:
                     cout << "Cerca de la corriente de agua encuentras algunas hierbas comestibles.\n";
                     cout << "Decides regresar a tu refugio con las hierbas.\n";
+                    CaminoOso();
                     break;
                 case 2:
                     cout << "Exploras la cueva y encuentras algunos hongos comestibles.\n";
                     cout << "Decides regresar a tu refugio con los hongos.\n";
+                    CaminoOso();
                     break;
                 case 3:
                     cout << "Buscas en el suelo del bosque y encuentras algunas bayas.\n";
                     cout << "Decides regresar a tu refugio con las bayas.\n";
+                    CaminoOso();
                     break;
                 default:
                     cout << "No encuentras nada util y decides regresar a tu refugio.\n";
+                    CaminoOso();
                     break;
             }
             break;
 
         default:
             cout << "No encuentras nada util y decides regresar a tu refugio.\n";
+            CaminoOso();
             break;
     }
 }
+
 
 //Aqui iran las opciones de "Explorar recursos"
 
@@ -1227,7 +1436,7 @@ void BuscarComida() {
     switch (decisionAdicional) {
         case 1:
             cout << "Decides tomar el camino de la izquierda.\n";
-            cout << "Encuentras una pequeña fuente de agua subterránea. Bebes un poco y te sientes revitalizado.\n";
+            cout << "Encuentras una pequena fuente de agua subterranea. Bebes un poco y te sientes revitalizado.\n";
             cout << "Decides regresar al cruce y tomar el camino de la derecha.\n";
             Esqueleto();
             break;
@@ -1241,28 +1450,748 @@ void BuscarComida() {
     }
 }
 
-    void Esqueleto(){
-                cout << "Has encontrado un esqueleto, parece tener una nota.\n";
-                cout << "Nota: Estoy atrapado en este lugar inhospito y frio, sin ropa, sin comida, sin agua, solamente yo y mi capacidad de poder escribir a pesar de haber sobrevivido\n"; // Esta es la nota que contenia un esqueleto en un bote de la cueva
-                cout << "todos estos dias en este infierno, quien habria dicho que aquellos habitantes de esta isla tan alejada de todo serian unos completos enfermos.\n";
-                cout << "Tenia la esperanza de encontrar el tesoro que tanto se rumoreaba que habia aqui, pero parece que todo fue un fraude, incluso juraria que fue plan de estos habitantes\n";
-                cout << "Por si alguien logra ver esta nota, mis fuerzas para poder moverme se han acabado, pero si alguien esta en mi misma situacion y con un poco de fuerzas, he dejado las llaves de mi lancha\n";
-                cout << "En aquel lugar donde solia pasar mis tardes junto a estos seres, donde por un momento en mi inocencia crei que los humanos no eran tan crueles como lo imaginaba\n";
-                cout << "Fin de la nota.\n";
-                Radio=true;
-                cout << "Has encontrado: Radio\n";
-                cout << "Has quedado en shock y comienzas a asustarte con tu alrededor, tienes muchas preguntas, decides ir a tu refugio para protegerte de lo que sea que haya sido eso.";
+ 
+
+/*================================Dia 4=======================================*/
+    void Dia4j1(){
+      cout << "Te levantas aun un poco desconcertado por la nota que encontraste" << endl;
+      cout << "Recuerdas la nota y lo que decia y decides buscar las llaves de la lancha para poder salir de la isla" << endl;
+      cout << "Sales de tu refugio para comenzar a buscar el lugar del que hablaba la nota" << endl;
+      cout << "Elige a que lugar iras a buscar" << endl;
+      cout << "1. Al bosque" << endl;
+      cout << "2. A la playa" << endl;
+      int a;
+      do
+      {
+      cout << "Elige una opcion: ";
+      cin >> a;
+       } while (a < 1 || a > 2);
+
+       switch (a)
+       {
+        /*vas al bosque*/
+       case 1:
+        bosque();
+        break;
+        case 2:
+        /*vas a la playa*/
+        playa();
+       
+       default:
+        break;
+       }
+    
     }
-    void CaminoOso(){
-                cout << "Regresas de camino a tu nuevo refugio para llevar las proviciones que has recolectado\n";
-                cout << "Ves a lo lejos un animal grande y cafe que se esta moviendo con tranquilidad, se trata de un oso.\n";
-                cout << "Das un mal paso y el oso logra escucharte, este se acerca agresivamente hacia ti.\n";
-                if (AyudarZorro==true)
-                {
-                    cout<<"Oh sorpresa! Es el zorro que ayudaste anteriormente a escapar, ahora el te ayuda a ti distrayendo al oso para que tu puedas hacerlo, logras volver al refugio.\n";
+
+
+void bosque() {
+    int b;
+    cout << "Decides ir al bosque, luego de caminar por 10 minutos te encuentras 2 caminos" << endl;
+    cout << "El primer camino parece ser un sendero que se dirige a la parte mas alta del bosque" << endl;
+    cout << "El segundo camino es plano y parece que dirige al otro lado de la isla" << endl;
+    
+    do {
+        cout << "1. El primero" << endl;
+        cout << "2. El segundo" << endl;
+        cout << "Elige una opcion: ";
+        cin >> b;  
+    } while (b < 1 || b > 2); 
+
+    switch (b) {
+        case 1: {
+            cout << "Elegiste el sendero que te lleva a la parte mas alta del bosque" << endl;
+            cout << "Despues de una caminata de una hora estas exhausto" << endl;
+            cout << "Decides revisar el inventario para ver si hay algo util" << endl << endl;
+
+            char invt;
+            do {
+                cout << "Presiona 'y' para ver el inventario: ";
+                cin >> invt;
+            } while (invt != 'y');
+
+            if (objetosRecolectados1 == 0) {
+                cout << "El inventario esta vacio." << endl;
+            } else {
+                cout << "Inventario de " << jugador1 << ": ";
+                for (int i = 0; i < objetosRecolectados1; i++) {
+                    cout << inventarioJugador1[i] << (i < objetosRecolectados1 - 1 ? ", " : "");
                 }
-                else{
-                    cout<<"Logras escapar, pero has dejado tu comida para que el oso se distraiga, logras volver al refugio.\n";
+                cout << endl;
+            }
+
+            // Verificar si hay agua en el inventario
+            bool tieneAgua = false;
+            for (int i = 0; i < objetosRecolectados1; i++) {
+                if (inventarioJugador1[i] == "agua") {
+                    tieneAgua = true;
+                    for (int j = i; j < objetosRecolectados1 - 1; j++) {
+                        inventarioJugador1[j] = inventarioJugador1[j + 1];
+                    }
+                    objetosRecolectados1--;
+                    break;
+                }
+            }
+
+            if (tieneAgua) {
+                cout << "Tienes agua en el inventario. Decides tomarla y sigues caminando." << endl;
+                cout << "Continuas caminando y a lo largo ves como se va terminando el camino y te acercas mas a la parte mas alta de la isla" << endl;
+                cout << "Luego de mas de una hora de caminar llegas a la parte mas alta de la isla pensando que ahi es donde el que escribio la not veia los atardeceres" << endl;
+                cout << "Pero te percatas que no hay ninguna pista o indicio de donde puedan estar las llaves de la lancha" << endl;
+                cout << "Parece que perdiste tiempo y esfuerzo al llegar hasta aca" << endl;
+
+                int rp;
+                do {
+                    cout << "Quieres regresar?" << endl;
+                    cout << "1. si" << endl;
+                    cout << "2. no, presiento que hay algo mas aqui" << endl;
+                    cin >> rp;     
+                } while (rp != 1 && rp != 2);
+
+                if (rp == 1) {
+                    cout << "Decides volver, una tormenta se acerca" << endl;
+                    cout << "Comienza a llover y decides correr" << endl;
+                    cout << "Por correr te resbalas en el lodo y te doblas el tobillo" << endl;
+                    j1esguince = true;
+                    cout << endl << endl;
+                    cout << "De camino ves a lo lejos humo provenir de un lado" << endl;
+                    cout << "Quieres explorar?" << endl;
+                    
+                    int t;
+                    do {
+                        cout << "1. Seguir el humo" << endl;
+                        cout << "2. Regresar al refugio" << endl;
+                        cout << "Digita tu opcion: ";
+                        cin >> t;
+                    } while (t != 1 && t != 2);
+
+                    switch (t) {
+                        case 1:
+                            cout << "Decides seguir el humo pero el esguince dificulta caminar rapido" << endl;
+                            cout << "Luego de 15 minutos de caminar cojeando llegas al origen del humo" << endl;
+                            cout << "Parece ser un campamento habitado por varias personas" << endl;
+                            cout << "Quieres caminar hacia su refugio?" << endl;
+                            
+                           int y;
+    do {
+        cout << "1. Si" << endl;
+        cout << "2. No" << endl;
+        cout << "Selecciona tu opcion: ";
+        cin >> y;
+    } while (y != 1 && y != 2);
+
+    if (y == 1) {
+        cout << "Decides caminar como puedes hacia su refugio, pero escuchas pasos acercarse rapidamente" << endl;
+        cout << "Que decides hacer?" << endl;
+        
+        int q;
+        do {
+            cout << "1. Esconderme" << endl;
+            cout << "2. Tratar de huir" << endl;
+            cout << "Digita tu opcion: ";
+            cin >> q;
+        } while (q != 1 && q != 2);
+
+        if (q == 1) {
+            int limitealeatorio = 2;
+            int numale = numrand(limitealeatorio);
+            switch (numale) {
+                case 1: 
+                    cout << "Parece ser que te escondiste bien, lograste librarla\n";
+                    void volvercamp();
+                    break;
+                case 2:
+                    cout << "Intentaste esconderte lo más rápido que pudiste pero tu esguince no te permitió llegar rápido y algo te vio\n";
+                    cout << "Lo que te vio no parece ser humano, intentas correr pero fue en vano, te alcanzó\n";
+                    void boom();
+                    break;
+            }
+        } else if (q == 2) {
+            cout << "Intentas huir pero el esguince no te deja avanzar, por lo que al intentar correr haces mucho ruido " << endl;
+            cout << "por lo que alertas a los seres que habitan ahí, no parecen ser humanos, ves que uno se pone en 4 patas y corre hacia ti" << endl;
+            void boom();
+
+        }
+        
+    } else if (y == 2) {
+       cout << "Decides irte porque no soportas apoyar el pie y como puedes intentas bajar la " << endl;
+        volvercamp(); // Llamada a la función volvercamp
+    }
+                    
+                            
+                    }
+                } else if (rp == 2) {
+                  int u;
+    cout << "Decides quedarte a investigar " << endl;
+    cout << "Ves a tu alrededor y ves una roca que parece que fue movida de su lugar original, al intentarla levantar notas que es una roca falsa " << endl;
+    cout << "La levantas sin problema y ves una nota pegada a la parte de abajo de la roca, la tinta esta un poco corroida pero aun asi se logra leer con un poco de dificultad " << endl;
+    cout << endl << endl;
+    cout << "Nota: " << endl;
+    cout << "En esta roca es donde me sentaba a ver los atardeceres cuando me alejaba de los otros seres, era mi lugar feliz" << endl;
+    cout << "Enterre una caja fuerte a no mas de 20 metros al norte de aca " << endl;
+    cout << "El codigo es: 4636752" << endl<<endl;
+    cout << "Presiona 1 para caminar: ";
+    cin >> u;
+
+    if (u == 1) {
+        cout << string(100, '\n');
+        cout << "Caminas 20 metros al norte y comienzas a escarbar" << endl;
+        cout << "La encuentras y te solicita el codigo" << endl << endl;
+    }
+
+    int intentos = 0;
+    bool codigoCorrecto = false;
+
+    while (intentos < 3 && !codigoCorrecto) {
+        int code;
+        cout << "Digita el codigo: ";
+        cin >> code;
+
+        if (code == 4636752) {
+            cout << "Codigo correcto! La caja fuerte se abre y encuentras una antena de radio." << endl;
+            inventarioJugador1[objetosRecolectados1++] = "antena de radio";
+             volvercamp();
+            
+            codigoCorrecto = true;
+        } else {
+            intentos++;
+            if (intentos < 3) {
+                cout << "Codigo incorrecto. Intenta de nuevo." << endl;
+            }
+        }
+    }
+
+    if (!codigoCorrecto) {
+      int ago;
+    cout << "Has agotado tus intentos." << endl;
+    cout << "La caja fuerte comienza a pitar mientras una luz roja parpadea cada vez más rápido." << endl;
+
+    do {
+        cout << "Que decides hacer?" << endl;
+        cout << "1. La caja fuerte tiene tiempo, seguro sus circuitos se quemaron, no creo que explote" << endl;
+        cout << "2. Correr" << endl;
+        cout << "Digita tu opcion: ";
+        cin >> ago;
+    } while (ago != 1 && ago != 2);
+
+ switch (ago) {
+        case 1:
+            cout << "Decides esperar mientras la caja deja de pitar y parpadear, la luz cada vez parpadea más rápido y el ruido es insoportable" << endl;
+            cout << "BOMMMM!!!" << endl;
+            boom(); 
+            break;
+        case 2:
+            cout << "Decides correr, alejandote lo mas rapido posible de la caja fuerte." << endl;
+            cout << "A lo lejos escuchas una explosion" << endl;
+            volvercamp(); 
+            break;
+        default:
+            cout << "Opcion invalida." << endl;
+            break;
+    }
+    }
+                }
+            } else {
+                cout << "No tienes agua en el inventario. Sigues caminando, pero ya muy cansado." << endl;
+                cout << "El camino aun es largo pero sigues caminando" << endl;
+                cout << "Tu cuerpo ya no pudo mas y te desmayaste, te desplomaste y te lastimaste" << endl;
+                j1cortada = true;
+                cout << "Parece que te abriste la cabeza" << endl;
+                cout << "Busca en el inventario si hay algo util" << endl << endl;
+
+                char invt;
+                do {
+                    cout << "Presiona 'y' para ver el inventario: ";
+                    cin >> invt;
+                } while (invt != 'y');
+
+                if (objetosRecolectados1 == 0) {
+                    cout << "El inventario esta vacio." << endl << endl;
+                } else {
+                    cout << "Inventario de " << jugador1 << ": ";
+                    for (int i = 0; i < objetosRecolectados1; i++) {
+                        cout << inventarioJugador1[i] << (i < objetosRecolectados1 - 1 ? ", " : "");
+                    }
+                    cout << endl;
                 }
 
+                
+                bool tieneBotiquin = false;
+                for (int i = 0; i < objetosRecolectados1; i++) {
+                    if (inventarioJugador1[i] == "botiquin") {
+                        tieneBotiquin = true;
+                        for (int j = i; j < objetosRecolectados1 - 1; j++) {
+                            inventarioJugador1[j] = inventarioJugador1[j + 1];
+                        }
+                        objetosRecolectados1--;
+                        break;
+                    }
+                }
+
+                if (tieneBotiquin) {
+                    cout << "Tienes un botiquin en el inventario. Decides usarlo " << endl;
+                    cout << "Estas herido por lo que abortas mision e intentas volver al refugio" << endl;
+                    volvercamp();
+                } else {
+                    cout << "No tienes un botiquin en el inventario." << endl;
+                    cout << "Por lo que no puedes curarte, la herida fue grave y mueres por hemorragia" << endl;
+                    
+                    string mensaje = "\033[31mFalleciste\033[0m\n";
+                    int retardo = 100; 
+                    for (char c : mensaje) {
+                        cout << c << flush;
+                   
+                    }
+                }
+            }
+            break;
+        }
+
+        case 2: {
+           int n;
+    cout << "Elegiste el camino plano que parece dirigir al otro lado de la isla." << endl;
+    cout << "Caminas sin mucho esfuerzo ya que es un camino plano" << endl;
+    cout << "Al parecer el camino te lleva al otro lado de la playa" << endl;
+    cout << "Ves que en la orilla hay peces por lo que decides entrar y pescar" << endl;
+
+    do {
+        cout << "Presiona 1 para pescar con las manos" << endl;
+        cout << "Digita tu opcion: ";
+        cin >> n;
+    } while (n != 1);
+
+    if (n == 1) {
+        cout << "Parece que agarraste un pez" << endl;
+
     }
+
+    cout << "¿Quieres seguir pescando?" << endl;
+    int p;
+    do {
+        cout << "1. si" << endl;
+        cout << "2. no" << endl;
+        cout << "Digita tu opcion: ";
+        cin >> p;
+    } while (p != 1 && p != 2);
+
+    if (p == 1) {
+        cout << "Sales de la orilla y dejas al pez que agarraste encima de una piedra" << endl;
+        cout << "Vuelves a la orilla para intentar pescar de nuevo" << endl;
+
+        int f;
+        do {
+            cout << "Presiona 1 para pescar" << endl;
+            cout << "Digita tu opcion: ";
+            cin >> f;
+        } while (f != 1);
+
+        if (f == 1) {
+            cout << "Parece que algo del fondo viene rqpido hacia ti" << endl;
+            cout << "ES UN TIBURON!" << endl;
+            boom(); 
+        }    
+            }  
+            else
+            {
+           volvercamp();
+            }
+            break;
+        }
+
+        default:
+            cout << "Opcion no valida." << endl;
+         break;
+    }
+}
+
+void playa() {
+    cout << "Te diriges a la playa que no está tan lejos del refugio." << endl;
+    cout << "Caminas no mucho hasta que escuchas cada vez más cerca el retumbar de las olas." << endl;
+    cout << "Llegas hasta la playa y comienzas a preguntarte hacia qué lado ir." << endl;
+    cout << "Observas a la derecha y ves un punto blanco a lo lejos." << endl;
+
+    int i;
+    do {
+        cout << "1. Ir a la izquierda" << endl;
+        cout << "2. Ir a la derecha" << endl;
+        cin >> i;
+    } while (i != 1 && i != 2);
+
+    if (i == 1) {
+        cout << "Te vas hacia la izquierda y notas que hay un contenedor de carga saliendo de la arena." << endl;
+        cout << "¿Quieres ir y escarbar?" << endl;
+
+        int r;
+        do {
+            cout << "1. Sí" << endl;
+            cout << "2. No creo que haya algo importante ahí" << endl;
+            cout << "Digita tu opción: ";
+            cin >> r;
+        } while (r != 1 && r != 2);
+
+        if (r == 1) {
+            cout << "Entre más te acercas al contenedor, notas que hay una parte rayada del contenedor." << endl;
+            cout << "Entre más te acercas, notas que aquello rayado no solo son líneas, hay un mensaje ahí." << endl;
+            cout << "Nota:" << endl << endl;
+            cout << "Me encuentro en el lugar donde vengo a despejar mi mente cuando no estoy rodeado de los otros seres." << endl;
+            cout << "Aquí es donde paso la mayoría de mis tardes viendo la puesta de sol, encontré una lancha no muy lejos de acá." << endl;
+            cout << "Si alguien está leyendo esta nota, quiero que sepa que enterré la llave aquí." << endl;
+            cout << "En la arena, donde las olas besan la costa, yace un mensaje para ti. Busca un lugar donde el sol se" << endl;
+            cout << "oculta y los niños juegan sin cesar. Allí, entre los granos dorados y la sombra de una vieja palmera" << endl;
+            cout << "encontrarás una concha. Abre la concha, y hallarás las llaves que buscas." << endl;
+            cout << "Fin de la nota." << endl << endl;
+
+            string o;
+            cout << "¿Dónde buscarás? (Escribe 'palmera' para buscar en la palmera): ";
+            cin >> o;
+
+            if (o == "palmera") {
+                cout << "Comienzas a buscar una palmera y notas que hay una sola palmera un poco seca a no más de 20 metros." << endl;
+                cout << "Te diriges hacia la palmera, escarbas un poco en la arena y encuentras una concha. La abres y hallas las llaves que buscas." << endl;
+                inventarioJugador1[objetosRecolectados1++] = "llaves de lancha";
+            } else {
+                cout << "Buscas en otro lugar, pero no encuentras nada. Tal vez deberías intentar en otro lugar." << endl;
+                int l;
+                do {
+                    cout << "¿Qué quieres hacer?" << endl;
+                    cout << "1. Volver al refugio" << endl;
+                    cout << "2. Seguir buscando" << endl;
+                    cin >> l;
+                } while (l != 1 && l != 2);
+
+                if (l == 1) {
+                    volvercamp();
+                } else {
+                    cout << "Te aferras a seguir buscando y te resignas para buscar en el contenedor." << endl;
+                    cout << "Entre más te acercas al contenedor, notas que hay una parte rayada del contenedor." << endl;
+                    cout << "Entre más te acercas, notas que aquello rayado no solo son líneas, hay un mensaje ahí." << endl;
+                    cout << "Nota:" << endl << endl;
+                    cout << "Me encuentro en el lugar donde vengo a despejar mi mente cuando no estoy rodeado de los otros seres." << endl;
+                    cout << "Aquí es donde paso la mayoría de mis tardes viendo la puesta de sol, encontré una lancha no muy lejos de acá." << endl;
+                    cout << "Si alguien está leyendo esta nota, quiero que sepa que enterré la llave aquí." << endl;
+                    cout << "En la arena, donde las olas besan la costa, yace un mensaje para ti. Busca un lugar donde el sol se" << endl;
+                    cout << "oculta y los niños juegan sin cesar. Allí, entre los granos dorados y la sombra de una vieja palmera" << endl;
+                    cout << "encontrarás una concha. Abre la concha, y hallarás las llaves que buscas." << endl;
+                    cout << "Fin de la nota." << endl << endl;
+
+                    cout << "¿Dónde buscarás? (Escribe 'palmera' para buscar en la palmera): ";
+                    cin >> o;
+
+                    if (o == "palmera") {
+                        cout << "Comienzas a buscar una palmera y notas que hay una sola palmera un poco seca a no más de 20 metros." << endl;
+                        cout << "Te diriges hacia la palmera, escarbas un poco en la arena y encuentras una concha. La abres y hallas las llaves que buscas." << endl;
+                        inventarioJugador1[objetosRecolectados1++] = "llaves de lancha";
+                    }
+                }
+            }
+        }
+    } else if (i == 2) {
+        cout << "Te vas hacia la derecha y sientes que algo te observa." << endl;
+        cout << "Que haces?" << endl;
+
+        int e;
+        do {
+            cout << "1. Buscar donde esconderse" << endl;
+            cout << "2. No hacer caso y seguir caminando" << endl;
+            cout << "Digita tu opcion: ";
+            cin >> e;
+        } while (e != 1 && e != 2);
+
+        if (e == 1) {
+            // Implementar el código para buscar donde esconderse
+        } else {
+            cout << "Decides no hacer caso y aquella mirada que sentiste que te seguía se te presenta enfrente." << endl;
+            cout << "Aquello que tienes enfrente parece estar muy hambriento, no tienes mucho que hacer." << endl;
+            int x;
+            do {
+                cout << "Que decides hacer?" << endl;
+                cout << "1. Correr" << endl;
+                cout << "2. Enfrentar tu destino" << endl;
+                cin >> x;
+            } while (x != 1 && x != 2);
+
+            if (x == 1) {
+                cout << "Decides correr, tratando de escapar de la amenaza." << endl;
+                cout << "Pero te alcanza." << endl;
+                boom();
+            } else if (x == 2) {
+                cout << "Decides enfrentar tu destino con valentía." << endl;
+                boom();
+            }
+        }
+    }
+}
+
+
+
+void volvercamp(){
+cout << "Como puedes intentas encontrar tu refugio" << endl;
+cout << "Luego de caminar un rato encuentras el camino y llegas al refugio a descansar" << endl << endl;
+char invt;
+                        do
+                        {
+                        cout << "Quieres ver tu inventario? (y/n): ";
+                        cin >> invt;
+                      } while (invt != 'y' && invt != 'n');
+
+                          if (invt == 'y') {
+                    if (objetosRecolectados1 == 0) {
+                        cout << "El inventario esta vacio." << endl;
+                    } else {
+                        cout << "Inventario de " << jugador1 << ": ";
+                        for (int i = 0; i < objetosRecolectados1; i++) {
+                            cout << inventarioJugador1[i] << (i < objetosRecolectados1 - 1 ? ", " : "");
+                        }
+                        cout << endl;
+                    }
+                }
+
+}
+
+void boom(){
+    string mensaje = "\033[31mFalleciste\033[0m\n";
+    int retardo = 100; 
+
+    for (char c : mensaje) {
+        cout << c << flush;
+ 
+    }
+}
+
+//==================================================================DIA 2 J2==========================================================================================================
+
+void RelajarseYConvivir() {
+    int J2Cap2decision1;
+    cout << "Decides relajarte y convivir con los aldeanos. Ganas su confianza y aprendes mas sobre sus costumbres.\n";
+    cout << "Te ofrecen un lugar acogedor para poder pasar la noche.\n";
+    cout << "Que quieres hacer?\n";
+    cout << "1. Aceptar la oferta y descansar\n";
+    cout << "2. Preguntar mas sobre sus costumbres\n";
+    cout << "3. Ofrecerte a ayudar en sus tareas\n";
+    cin >> J2Cap2decision1;
+  
+
+    if (J2Cap2decision1 == 1) {
+        cout << "Aceptas la oferta y descansas en un lugar seguro. Te sientes mucho mejor al dia siguiente.\n";
+    } else if (J2Cap2decision1 == 2) {
+        cout << "Decides preguntar mas sobre sus costumbres. Los aldeanos te cuentan sobre sus rituales y tradiciones.\n";
+        cout << "Aprendes mucho sobre su forma de vida y te sientes mas conectado con ellos.\n";
+    } else if (J2Cap2decision1 == 3) {
+        cout << "Te ofreces a ayudar en sus tareas. Los aldeanos aprecian tu ayuda.\n";
+        cout << "Te sientes mas util y parte de la comunidad.\n";
+    }
+      cout << "Por confiar en ellos, te obsequian un mapa, el cual te ayudaria a estar al tanto de donde esta cada cosa.\n";
+}
+
+void EncuentroAldeanos();
+
+void J2Capitulo2() {
+    int J2Cap2decision1;
+
+    cout << "Luego de una larga noche, decides salir a explorar. Ves que a lo lejos parece haber una aldea que parece estar abandonada. Decides ir a ver que pasa...\n";
+    cout << "El ambiente no parece ser optimo, sientes muy malas energias.\n";
+    cout << "Te acercas y... Oh sorpresa! Resultan haber aldeanos en esas casas en estado deplorable.\n";
+    cout << "Uno de los aldeanos te ha visto!\n";
+    cout << "Que decides hacer?\n";
+    cout << "1. Acercarte amigablemente\n";
+    cout << "2. Huir\n";
+    cin >> J2Cap2decision1;
+
+    switch (J2Cap2decision1) {
+        case 1:
+            cout<<"Llegas saludando amablemente a los aldeanos, ellos te responden muy calida y acogedoramente.\n";
+            EncuentroAldeanos();
+            break;
+        case 2:
+            cout << "Intentas huir, sin embargo, los aldeanos te logran rodear\n";
+            cout << "Parece que estas en grave peligro...\n";
+            cout << "Oh sorpresa! Los aldeanos te reciben con una sonrisa y siendo muy amables.\n";
+            EncuentroAldeanos();
+            break;
+        default:
+            cout << "Opcion no valida. Intentalo de nuevo.\n";
+            break;
+    }
+}
+
+using namespace std;
+
+void EncuentroAldeanos() {
+    int J2Cap2decision2;
+    cout << "Te sientes mas recuperado y tranquilo.\n";
+    cout << "Que quieres hacer?\n";
+    cout << "1. Preguntar quienes son\n";
+    cout << "2. Relajarte y convivir\n";
+    cin >> J2Cap2decision2;
+
+    if (J2Cap2decision2 == 1) {
+        cout << "Responden: 'Somos sobrevivientes de un naufragio, llevamos aqui muchas decadas tratando de salir pero nadie nos ha encontrado.'\n";
+        cout << "Que respondes?\n";
+        cout << "1. Preguntar: Como han sobrevivido?\n";
+        cout << "2. Agradecerles la hospitalidad\n";
+        int J2Cap2decision3;
+        cin >> J2Cap2decision3;
+
+        if (J2Cap2decision3 == 1) {
+            cout << "Responden: 'Hemos sobrevivido gracias a nuestra union y cooperacion, mientras unos se encargaban de la comida y suministros, otros se encargaban de hacer este ambiente un lugar habitable para los demas.\n";
+            cout << "Tenemos areas y servicios de salud medica para estar sanos.\n";
+            cout << "Tu pareces estar en mal estado, ven y te ayudaremos a recuperarte.'\n";
+            cout << "Que decides hacer?\n";
+            cout << "1. Aceptar la ayuda\n";
+            cout << "2. Declinar la ayuda\n";
+            int J2Cap2decision4;
+            cin >> J2Cap2decision4;
+
+            if (J2Cap2decision4 == 1) {
+                cout << "Recibes ayuda y atencion medica, te sientes mucho mejor, recibes fisioterapia y tus huesos se sienten mejor.\n";
+                cout << "Que quieres hacer ahora?\n";
+                cout << "1. Explorar la aldea\n";
+                cout << "2. Descansar y recuperarte\n";
+                int J2Cap2decision5;
+                cin >> J2Cap2decision5;
+
+                if (J2Cap2decision5 == 1) {
+                    cout << "Exploras la aldea y descubres areas de cultivo, talleres y una cueva oculta con simbolos extranos.\n";
+                    cout << "Que decides hacer?\n";
+                    cout << "1. Investigar la cueva\n";
+                    cout << "2. Volver con los aldeanos\n";
+                    int J2Cap2decision6;
+                    cin >> J2Cap2decision6;
+
+                    if (J2Cap2decision6 == 1) {
+                        cout << "Investigas la cueva y descubres algo que da muy mala espina, ves varios cadaveres momificados.\n";
+                        cout << "Que decides hacer?\n";
+                        cout << "1. Confrontar a los aldeanos y preguntarles que significa eso\n";
+                        cout << "2. Ignorarlo y pasar de largo\n";
+                        int J2Cap2decision7;
+                        cin >> J2Cap2decision7;
+
+                        if (J2Cap2decision7 == 1) {
+                            cout << "Vas con los aldeanos en busca de respuestas.\n";
+                            cout << "Ellos responden: 'Ellos? Son nuestros hermanos caidos en esta lucha por sobrevivir, a lo largo de los anos hemos perdido a muchos de nuestros seres queridos desde que hemos estado aqui, sin embargo, ellos nunca nos abandonaran mientras su alma y su cuerpo esten con nosotros.'\n";
+                            cout << "Decides confiar en ellos y piensas que son culturas distintas, te ofrecen pasar la noche en una habitacion y accedes.";
+                        } else {
+                            cout << "Decides ignorar los cadaveres y seguir explorando la cueva. Te sientes inquieto pero decides seguir adelante.\n";
+                        }
+                    } else {
+                        cout << "Vuelves con los aldeanos y te integras en sus actividades cotidianas.\n";
+                        RelajarseYConvivir();
+                    }
+                } else {
+                    cout << "Decides descansar y recuperarte completamente antes de hacer cualquier otra cosa.\n";
+                    RelajarseYConvivir();
+                }
+            } else {
+                cout << "Responden: 'Entiendo que puedas tener desconfianza de nosotros, sin embargo, nosotros salimos adelante apoyandonos unos a otros, nada de esto hubiera sido posible sin el companerismo y la capacidad que tenemos de ayudarnos los unos a los otros. Si necesitas algo, no dudes en contar con nosotros.'\n";
+                cout << "Que decides hacer?\n";
+                cout << "1. Aceptar la hospitalidad y convivir\n";
+                cout << "2. Aceptar pero desconfiar de ellos.\n";
+                int J2Cap2decision5;
+                cin >> J2Cap2decision5;
+
+                if (J2Cap2decision5 == 1) {
+                    RelajarseYConvivir();
+                    cout << "Te ofrecen un lugar acogedor para poder pasar la noche";
+                } else {
+                    cout << "A pesar que no confias en ellos, aceptas pasar la noche en su aldea.\n";
+                    RelajarseYConvivir();
+                    
+                }
+            }
+        }
+        else{
+            RelajarseYConvivir();
+        }
+    } else {
+        RelajarseYConvivir();
+        cout << "Te ofrecen un lugar acogedor para poder pasar la noche.\n";
+    }
+}
+
+//===================================================================DIA 3 J2=======================================================================================================
+
+void J2Cap3() {
+    string decisionCuchillo;
+    
+    cout << "Has despertado luego de una larga noche acogedora y calida debido a que escuchas muchos ruidos afuera de tu habitacion\n";
+    cout << "Estas somnoliento y logras ver siluetas entre los arboles con luces\n";
+
+    int decision1cap3;
+    cout << "Que decides hacer?\n";
+    cout << "1. Acercarse cautelosamente\n";
+    cout << "2. Acercarse directamente\n";
+    cin >> decision1cap3;
+
+    if (decision1cap3 == 1) {
+        cout << "Observas desde una distancia segura y ves a los habitantes realizar rituales extranos.\n";
+        cout << "1. Espiar mas tiempo\n";
+        cout << "2. Buscar otra entrada\n";
+        cin >> decision1cap3;
+
+        if (decision1cap3 == 1) {
+            cout << "No puede ser! Estan haciendo un ritual con una persona viva!\n";
+            cout << "1. Huir desesperadamente\n";
+            cout << "2. No arriesgarse y mantener la calma\n";
+            cin >> decision1cap3;
+
+            if (decision1cap3 == 1) {
+                cout << "Corres lo mas que puedas, sin embargo, logran escucharte y logran rodearte\n";
+                cout << "Ahora te han atrapado y has muerto\n";
+                return;
+            } else {
+                cout << "A pesar de que estas muerto de los nervios decides salir sigilosamente, logras hacerlo con exito y una vez estas lo suficientemente lejos corres lo mas que puedas.\n";
+                cout << "Te encuentras en medio del bosque, sin embargo, tienes un mapa por el cual te podras guiar y volver a la aldea si asi lo deseas";
+            }
+        } else {
+            cout << "Encuentras una entrada trasera menos vigilada.\n";
+            cout << "Logras escapar a traves de esa entrada.\n";
+            cout << "Te encuentras en medio del bosque, sin embargo, tienes un mapa por el cual te podras guiar y volver a la aldea si asi lo deseas";
+
+        }
+
+        cout << "Los habitantes te ven y te capturan.\n";
+        cout << "Debes intentar escapar.\n";
+        cout << "1. Crear una distraccion\n";
+        cout << "2. Buscar una salida secreta\n";
+        cin >> decision1cap3;
+
+        if (decision1cap3 == 1) {
+            cout << "Prendes fuego a algunos suministros y escapas en el caos.\n";
+            cout << "Pierdes la mayoria de tus pertenencias pero escapas.\n";
+            cout << "Te encuentras en medio del bosque, sin embargo, tienes un mapa por el cual te podras guiar y volver a la aldea si asi lo deseas";
+
+        } else {
+            cout << "Encuentras un tunel subterraneo que te lleva fuera de la aldea.\n";
+            cout << "Logras escapar ileso y te encuentras en medio del bosque, sin tener otro rumbo alguno.\n";
+            cout << "sin embargo, tienes un mapa por el cual te podras guiar y volver a la aldea si asi lo deseas";
+
+        }
+    } else {
+        cout << "Parece que acercarse directamente no fue una buena opcion.\n";
+        cout << "Ves que estan haciendo algo que no te puedes imaginar\n";
+        cout << "Estan sacrificando a una persona y te han visto a ti\n";
+        cout << "Te han agarrado bruscamente.\n";
+        if (tieneCuchillo == true) {
+            cout << "Parece que tienes un cuchillo en tu inventario, puedes usarlo para defenderte y huir.\n";
+            cout << "Quieres usarlo? (Y/N): ";
+            cin >> decisionCuchillo;
+
+            if (decisionCuchillo == "Y" || decisionCuchillo == "y") {
+                cout << "Has usado el cuchillo para defenderte.\n";
+                cout << "Logras huir y te encuentras en medio del bosque.\n";
+                cout << "sin embargo, tienes un mapa por el cual te podras guiar y volver a la aldea si asi lo deseas";
+            } else {
+                cout << "Decides no usar el cuchillo.\n";
+                cout << "No tienes nada para defenderte y mueres a manos de los aldeanos.\n";
+            }
+        } else {
+            cout << "No tienes nada para defenderte y mueres a manos de los aldeanos.\n";
+        }
+    }
+}
+
+
+void Dia4j2(){
+
+
+}
+
