@@ -1630,7 +1630,7 @@ void bosque() {
         if (code == 4636752) {
             cout << "Codigo correcto! La caja fuerte se abre y encuentras una antena de radio." << endl;
             inventarioJugador1[objetosRecolectados1++] = "antena de radio";
-            void volvercamp();
+             volvercamp();
             
             codigoCorrecto = true;
         } else {
@@ -1648,7 +1648,7 @@ void bosque() {
 
     do {
         cout << "Que decides hacer?" << endl;
-        cout << "1. La caja fuerte tiene anos, seguro sus circuitos se quemaron, no creo que explote" << endl;
+        cout << "1. La caja fuerte tiene tiempo, seguro sus circuitos se quemaron, no creo que explote" << endl;
         cout << "2. Correr" << endl;
         cout << "Digita tu opcion: ";
         cin >> ago;
@@ -1769,31 +1769,137 @@ void bosque() {
             cout << "Parece que algo del fondo viene rqpido hacia ti" << endl;
             cout << "ES UN TIBURON!" << endl;
             boom(); 
-        }
-                      
-               
-            }
-            
+        }    
+            }  
             else
             {
            volvercamp();
             }
-            
-            
-
-          
             break;
         }
 
         default:
             cout << "Opcion no valida." << endl;
-            break;
+         break;
     }
 }
 
+void playa() {
+    cout << "Te diriges a la playa que no está tan lejos del refugio." << endl;
+    cout << "Caminas no mucho hasta que escuchas cada vez más cerca el retumbar de las olas." << endl;
+    cout << "Llegas hasta la playa y comienzas a preguntarte hacia qué lado ir." << endl;
+    cout << "Observas a la derecha y ves un punto blanco a lo lejos." << endl;
 
-void playa(){
-  cout << "todo es playa" << endl;
+    int i;
+    do {
+        cout << "1. Ir a la izquierda" << endl;
+        cout << "2. Ir a la derecha" << endl;
+        cin >> i;
+    } while (i != 1 && i != 2);
+
+    if (i == 1) {
+        cout << "Te vas hacia la izquierda y notas que hay un contenedor de carga saliendo de la arena." << endl;
+        cout << "¿Quieres ir y escarbar?" << endl;
+
+        int r;
+        do {
+            cout << "1. Sí" << endl;
+            cout << "2. No creo que haya algo importante ahí" << endl;
+            cout << "Digita tu opción: ";
+            cin >> r;
+        } while (r != 1 && r != 2);
+
+        if (r == 1) {
+            cout << "Entre más te acercas al contenedor, notas que hay una parte rayada del contenedor." << endl;
+            cout << "Entre más te acercas, notas que aquello rayado no solo son líneas, hay un mensaje ahí." << endl;
+            cout << "Nota:" << endl << endl;
+            cout << "Me encuentro en el lugar donde vengo a despejar mi mente cuando no estoy rodeado de los otros seres." << endl;
+            cout << "Aquí es donde paso la mayoría de mis tardes viendo la puesta de sol, encontré una lancha no muy lejos de acá." << endl;
+            cout << "Si alguien está leyendo esta nota, quiero que sepa que enterré la llave aquí." << endl;
+            cout << "En la arena, donde las olas besan la costa, yace un mensaje para ti. Busca un lugar donde el sol se" << endl;
+            cout << "oculta y los niños juegan sin cesar. Allí, entre los granos dorados y la sombra de una vieja palmera" << endl;
+            cout << "encontrarás una concha. Abre la concha, y hallarás las llaves que buscas." << endl;
+            cout << "Fin de la nota." << endl << endl;
+
+            string o;
+            cout << "¿Dónde buscarás? (Escribe 'palmera' para buscar en la palmera): ";
+            cin >> o;
+
+            if (o == "palmera") {
+                cout << "Comienzas a buscar una palmera y notas que hay una sola palmera un poco seca a no más de 20 metros." << endl;
+                cout << "Te diriges hacia la palmera, escarbas un poco en la arena y encuentras una concha. La abres y hallas las llaves que buscas." << endl;
+                inventarioJugador1[objetosRecolectados1++] = "llaves de lancha";
+            } else {
+                cout << "Buscas en otro lugar, pero no encuentras nada. Tal vez deberías intentar en otro lugar." << endl;
+                int l;
+                do {
+                    cout << "¿Qué quieres hacer?" << endl;
+                    cout << "1. Volver al refugio" << endl;
+                    cout << "2. Seguir buscando" << endl;
+                    cin >> l;
+                } while (l != 1 && l != 2);
+
+                if (l == 1) {
+                    volvercamp();
+                } else {
+                    cout << "Te aferras a seguir buscando y te resignas para buscar en el contenedor." << endl;
+                    cout << "Entre más te acercas al contenedor, notas que hay una parte rayada del contenedor." << endl;
+                    cout << "Entre más te acercas, notas que aquello rayado no solo son líneas, hay un mensaje ahí." << endl;
+                    cout << "Nota:" << endl << endl;
+                    cout << "Me encuentro en el lugar donde vengo a despejar mi mente cuando no estoy rodeado de los otros seres." << endl;
+                    cout << "Aquí es donde paso la mayoría de mis tardes viendo la puesta de sol, encontré una lancha no muy lejos de acá." << endl;
+                    cout << "Si alguien está leyendo esta nota, quiero que sepa que enterré la llave aquí." << endl;
+                    cout << "En la arena, donde las olas besan la costa, yace un mensaje para ti. Busca un lugar donde el sol se" << endl;
+                    cout << "oculta y los niños juegan sin cesar. Allí, entre los granos dorados y la sombra de una vieja palmera" << endl;
+                    cout << "encontrarás una concha. Abre la concha, y hallarás las llaves que buscas." << endl;
+                    cout << "Fin de la nota." << endl << endl;
+
+                    cout << "¿Dónde buscarás? (Escribe 'palmera' para buscar en la palmera): ";
+                    cin >> o;
+
+                    if (o == "palmera") {
+                        cout << "Comienzas a buscar una palmera y notas que hay una sola palmera un poco seca a no más de 20 metros." << endl;
+                        cout << "Te diriges hacia la palmera, escarbas un poco en la arena y encuentras una concha. La abres y hallas las llaves que buscas." << endl;
+                        inventarioJugador1[objetosRecolectados1++] = "llaves de lancha";
+                    }
+                }
+            }
+        }
+    } else if (i == 2) {
+        cout << "Te vas hacia la derecha y sientes que algo te observa." << endl;
+        cout << "Que haces?" << endl;
+
+        int e;
+        do {
+            cout << "1. Buscar donde esconderse" << endl;
+            cout << "2. No hacer caso y seguir caminando" << endl;
+            cout << "Digita tu opcion: ";
+            cin >> e;
+        } while (e != 1 && e != 2);
+
+        if (e == 1) {
+            // Implementar el código para buscar donde esconderse
+        } else {
+            cout << "Decides no hacer caso y aquella mirada que sentiste que te seguía se te presenta enfrente." << endl;
+            cout << "Aquello que tienes enfrente parece estar muy hambriento, no tienes mucho que hacer." << endl;
+            int x;
+            do {
+                cout << "Que decides hacer?" << endl;
+                cout << "1. Correr" << endl;
+                cout << "2. Enfrentar tu destino" << endl;
+                cin >> x;
+            } while (x != 1 && x != 2);
+
+            if (x == 1) {
+                cout << "Decides correr, tratando de escapar de la amenaza." << endl;
+                cout << "Pero te alcanza." << endl;
+                boom();
+            } else if (x == 2) {
+                cout << "Decides enfrentar tu destino con valentía." << endl;
+                boom();
+            }
+        }
+    }
 }
 
 
@@ -1823,13 +1929,13 @@ char invt;
 }
 
 void boom(){
-  
-            string mensaje = "\033[31mFalleciste\033[0m\n";
-            int retardo = 100; // Retardo en milisegundos entre cada carácter
-            for (char c : mensaje) {
-                cout << c << flush;
-                this_thread::sleep_for(chrono::milliseconds(retardo));
-            }
+    string mensaje = "\033[31mFalleciste\033[0m\n";
+    int retardo = 100; 
+
+    for (char c : mensaje) {
+        cout << c << flush;
+        this_thread::sleep_for(chrono::milliseconds(retardo)); 
+    }
 }
 
 void Dia4j2(){
