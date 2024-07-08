@@ -1447,7 +1447,7 @@ int main()
 
 
 }
- }
+            }
 
 void RecolectarMateriales() {
     while (!tieneMadera || !tieneHojas || !tieneCuerda) {
@@ -2164,7 +2164,7 @@ void bosque() {
                 }
             }
             break;
-            }
+        }
 
         case 2: {
            int n;
@@ -2221,7 +2221,7 @@ void bosque() {
             cout << "Opcion no valida." << endl;
          break;
         }
-    }
+}
 
 void playa() {
     cout << "Te diriges a la playa que no está tan lejos del refugio." << endl;
