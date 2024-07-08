@@ -62,6 +62,10 @@ char decision;
 int Arena;
 bool Radio=false;
 
+//Funciones dia 5
+void dia5j1();
+void dia5j2();
+
 int numrand(int); // Declaracion de funcion de numero aleatorio
 int numrand(int limitealatorio)
 { // Funcion para numero aleatorio
@@ -477,7 +481,7 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
             Dia4j1();
             break;
           case 5:
-            cout << "E\n";
+            dia5j1();
             break;
           case 6:
             cout << "F\n";
@@ -780,7 +784,7 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
             Dia4j2();
             break;
           case 5:
-            cout << "E\n";
+            dia5j2();
             break;
           case 6:
             cout << "F\n";
