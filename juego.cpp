@@ -64,6 +64,8 @@ char decision;
 int Arena;
 bool Radio=false;
 
+
+
 int numrand(int); // Declaracion de funcion de numero aleatorio
 int numrand(int limitealatorio)
 { // Funcion para numero aleatorio
@@ -479,7 +481,7 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
             Dia4j1();
             break;
           case 5:
-            cout << "E\n";
+           
             break;
           case 6:
             cout << "F\n";
@@ -782,7 +784,7 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
             Dia4j2();
             break;
           case 5:
-            cout << "E\n";
+       
             break;
           case 6:
             cout << "F\n";
@@ -1599,18 +1601,18 @@ void bosque() {
             switch (numale) {
                 case 1: 
                     cout << "Parece ser que te escondiste bien, lograste librarla\n";
-                    void volvercamp();
+                   volvercamp();
                     break;
                 case 2:
-                    cout << "Intentaste esconderte lo más rápido que pudiste pero tu esguince no te permitió llegar rápido y algo te vio\n";
-                    cout << "Lo que te vio no parece ser humano, intentas correr pero fue en vano, te alcanzó\n";
-                    void boom();
+                    cout << "Intentaste esconderte lo mas rapido que pudiste pero tu esguince no te permitio llegar rapido y algo te vio\n";
+                    cout << "Lo que te vio no parece ser humano, intentas correr pero fue en vano, te alcanzo\n";
+                     boom();
                     break;
             }
         } else if (q == 2) {
             cout << "Intentas huir pero el esguince no te deja avanzar, por lo que al intentar correr haces mucho ruido " << endl;
-            cout << "por lo que alertas a los seres que habitan ahí, no parecen ser humanos, ves que uno se pone en 4 patas y corre hacia ti" << endl;
-            void boom();
+            cout << "por lo que alertas a los seres que habitan ahi, no parecen ser humanos, ves que uno se pone en 4 patas y corre hacia ti" << endl;
+             boom();
 
         }
         
@@ -1736,13 +1738,7 @@ void bosque() {
                 } else {
                     cout << "No tienes un botiquin en el inventario." << endl;
                     cout << "Por lo que no puedes curarte, la herida fue grave y mueres por hemorragia" << endl;
-                    
-                    string mensaje = "\033[31mFalleciste\033[0m\n";
-                    int retardo = 100; 
-                    for (char c : mensaje) {
-                        cout << c << flush;
-                   
-                    }
+                    boom();
                 }
             }
             break;
@@ -1827,7 +1823,7 @@ void playa() {
 
         int r;
         do {
-            cout << "1. Sí" << endl;
+            cout << "1. Si" << endl;
             cout << "2. No creo que haya algo importante ahi" << endl;
             cout << "Digita tu opción: ";
             cin >> r;
@@ -1919,7 +1915,7 @@ void playa() {
                 cout << "Pero te alcanza." << endl;
                 boom();
             } else if (x == 2) {
-                cout << "Decides enfrentar tu destino con valentía." << endl;
+                cout << "Decides enfrentar tu destino con valentia." << endl;
                 boom();
             }
         }
