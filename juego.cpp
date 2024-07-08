@@ -30,7 +30,7 @@ void J2Capitulo2();
 
 // DIA 3 J2
 void J2Cap3();
-
+bool tienebengala = false;
 bool tieneLinterna = false;
 bool tieneMadera = false;
 bool tieneHojas = false;
@@ -2478,5 +2478,123 @@ void Dia4j2(){
  }
 
 void dia5j2(){
-
+   cout<<"Despiertas por la madrugada, te levantas, que deberias hacer ahora\n";
+   cout<<"Te dirijes a la playa o adentras al bosque\n";
+   do{
+    cout<<"1. Vamos a la playa\n"<<"2. Adentremonos en el bosque\n";
+    cin>>desicionp;
+  if(desicionp!=1&&desicionp!=2){
+        cout<<"Valor no valido, ingrese un valor valido\n";
+         }
+   }while(desicionp!=1&&desicionp!=2);
+   if(desicionp==1){
+    cout<<"Vas de camino a la playa cuando empieza a llover, parece que se pondra peor Quieres regresar?\n";
+    do{
+        cout<<"1. Sigamos caminando\n"<<"2. Mejor regresemos, podria ser peligroso\n";
+      if(desicion!=1&&desicion!=2){
+        cout<<"Valor no valido, ingrese un valor valido\n";
+         }
+    }while(desicion!=1&&desicion!=2);
+    if(desicion==1){
+       cout<<"Sigues caminando y ves que las olas cada vez se vuelven mas violentas\n";
+       cout<<"A lo lejos logras divisar una figura de un barco\n";
+       for(int i = 0; i< objetosRecolectados1; i++){
+        tienebengala = true;
+        for(int j = i; j < objetosRecolectados1 - 1; j++){
+            inventarioJugador1[j] = inventarioJugador1[j + 1];
+        }
+        objetosRecolectados1--;
+        break;
+       }
+    if(tienebengala==true){
+       cout<<"Usas la bengala para llamar la atencion del barco\n";
+       cout<<"Parece haber visto tu llamado\n";
+       cout<<"El barco se acerca\n";
+       cout<<"Sobrevivistes\n";
+    }else{
+        cout<<"Logras ver una gran roca la cual podrias usar para que te vean, subes y saltas para que te vean\n";
+        limitealeatorio = 2;
+        numale = numrand(limitealeatorio);
+        switch(numale){
+            case 1:
+            cout<<"Por fortuna el barco parece haberte visto y se regresa a la orilla\n";
+            cout<<"Te has salvado\n";
+            cout<<"Sobrevivistes\n";
+            break;
+            case 2:
+            cout<<"Al saltar te caes y te rompes el cuello\n";
+            cout<<"Nunca sabras si te vieron\n";
+            boom();
+            break;
+        }
+    }
+    }else{
+        cout<<"Regresas al refugio, pero en camino te agarra la lluvia, esta comienza a ser cada vez mas furte, y con la neblina empiezas a desorientarte, finalmente por el cansancio caes\n";
+        boom();
+    }
+   }else{
+       cout<<"Te dirijes al bosque, pero empieza a llover\n";
+       cout<<"Quieres continuar o mejor regresas al tu base\n";
+       do{
+        cout<<"1. Continuemos es lo mejor\n"<<"2. Mejor regresar\n";
+        cin>>desicion;
+       if(desicion!=1&&desicion!=2){
+        cout<<"Valor no valido, ingrese un valor valido\n";
+         }
+       }while(desicion!=1&&desicion!=2);
+       if(desicion ==1){
+        cout<<"Al caminar por un rato, descubre un antiguo hangar abandonado\n";
+        cout<<"Parece que no hay otro lugar a donde ir, asi que decides quedarte ahi por la lluvia\n";
+        cout<<"Al ingresar al hangar observas una avioneta en un estado aceptable\n";
+        cout<<"Crees que sea buena idea intentar hacer funcionar esa cosa?\n";
+        do{
+        cout<<"1. Intentemos\n"<<"2. Mejor no, podria ser peligroso\n";
+        cin>>desicion;
+            if(desicion!=1&&desicion!=2){
+        cout<<"Valor no valido, ingrese un valor valido\n";
+         }
+        }while(desicion!=1&&desicion!=2);
+        if(desicion==1){
+            limitealeatorio = 2;
+            numale = numrand(limitealeatorio);
+            switch(numale){
+                case 1:
+                cout<<"Luego de estar intentando logras arrancar el avion\n";
+                cout<<"Sales volando del lugar\n";
+                cout<<"Sobrevivistes\n";
+                break;
+                case 2:
+                cout<<"Al intentar hacer que arranque, el motor empezo a hacer sonido raros\n";
+                cout<<"El avion termino explotando\n";
+                cout<<"No quedo mucho de ti\n";
+                boom();
+                break;
+            }
+        }else{
+            cout<<"Decides esperar a que pase la lluvia\n";
+            cout<<"Luego de un tiempo escuchas un avion pasar\n";
+            cout<<"Parece que son unos militares\n";
+            cout<<"Al aterrizar los soldados te dicen que digas quien eres y que haces ahi\n";
+            cout<<"Que deberias hacer?\n";
+            do{
+                cout<<"1. Explicarles exactamente a detalle todo\n"<<"2. Golpear y despues preguntar\n";
+                cin>>desicion;
+             if(desicion!=1&&desicion!=2){
+            cout<<"Valor no valido, ingrese un valor valido\n";
+            }
+            }while(desicion!=1&&desicion!=2);
+            if(desicion==1){
+                cout<<"Les explicas todo y ellos entienden tu situacion, te ayudan y te sacan de la isla\n";
+                cout<<"Sobrevivistes\n";
+            }else{
+                cout<<"Intentas golpear pero te reciven con una bala\n";
+                cout<<"La verdad no se que esperabas\n";
+                boom();
+            }
+        }
+       }else{
+         cout<<"Regresas al refugio, pero en camino te agarra la lluvia, esta comienza a ser cada vez mas furte, y con la neblina empiezas a desorientarte, finalmente por el cansancio caes\n";
+        boom();
+       }
+   }
 }
