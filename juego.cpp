@@ -11,7 +11,7 @@ using namespace std;
 
 // Estado fisico de los jugadores
   bool j1esguince = false, j2esguince = false, j1fractura = false, j2fractura = false, j1cortada = false, j2cortada = false;
-
+  int contadorpuntoj1 = 0, contadorpuntosj2 = 0;
 
 
 
@@ -80,7 +80,8 @@ int numrand(int limitealatorio)
   int limitealeatorio = 0;
   int numale = 0;                                                   // Numero aleatorio
   int resp;                                                         /*Variable para volver al menu principal*/
-  int j1vida = 100, j2vida = 100, limitedias = 7, contadordia = 1, contadorswitch=1; // La vida de los jugadores, limite de dias y contador de dias
+  bool j1vida = true, j2vida = true; 
+  int limitedias = 5, contadordia = 1, contadorswitch=1; // La vida de los jugadores, limite de dias y contador de dias
   bool turno = true;                                                // Son los turnos de cada jugador
   int desicion = 0, desicionp = 0;                                               // Para tomar deciciones dentro del juego
 
@@ -123,6 +124,7 @@ int main()
   do /*Este do se conecta con el while de resp y sirve para volver al menu principal*/
   {
     int opcion;
+cout << "\033[95m  <The Forgotten Island/>\033[0m" << endl << endl;
 cout << "\033[95m  <Menu principal/>\033[0m" << endl << endl;
 cout << "\033[96m > 1.....Iniciar juego \033[0m\n" << endl; 
 cout << "\033[93m > 2.....Historia      \033[0m\n" << endl;
@@ -147,7 +149,7 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
     switch (opcion)
     {
     case 1:
-
+      
       cout << "Por favor, ingresa el nombre del jugador 1: ";
       cin >> jugador1;
       cout << "Ahora ingresa el nombre del jugador 2: ";
@@ -186,6 +188,7 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
 
       do
       {
+        if(j1vida==true||j2vida==true){
         if (contadordia == 1)
         { // Contador de dias
          cout << "\033[1;35m" << "\t===============\n" << "\033[0m";
@@ -205,11 +208,13 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
           contadordia++;
       
         }
+        }
         switch (turno)
         {
         case true:
+        if(j1vida==true){
         cout << "\033[34m\n\nTurno de " << jugador1 << "\033[0m" << endl;
-
+        }
           switch (contadorswitch)
           {
           case 1:
@@ -475,19 +480,28 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
           
             break;
           case 2:
+          if(j1vida==true){
             Dia2();
+            contadorpuntoj1 = 2;
+          }
             break;
           case 3:
+          if(j1vida){
             Capitulo3();
+            contadorpuntoj1 ++;
+          }
             break;
           case 4:
+          if(j1vida==true){
             Dia4j1();
+            contadorpuntoj1 ++;
+          }
             break;
           case 5:
-            cout << "E\n";
-            break;
-          case 6:
-            cout << "F\n";
+          if(j1vida==true){
+            dia5j1();
+            contadorpuntoj1 ++;
+          }
             break;
           }
           _getch();
@@ -495,7 +509,9 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
           break;
           // Aqui va todo el codigo del juador 1, el cout es namas para ver si funcionaba lo de los turnes jeje
         case false:
+        if(j2vida==true){
        cout << "\033[35m\n\nTurno de " << jugador2 << "\033[0m" << endl;
+        }
           switch (contadorswitch)
           {
           case 1:
@@ -778,19 +794,28 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
 
             break;
           case 2:
+          if(j2vida==true){
             J2Capitulo2();
+            contadorpuntosj2 =2;
+          }
             break;
           case 3:
+          if(j2vida==true){
             J2Cap3();
+            contadorpuntosj2 ++;
+          }
             break;
           case 4:
+          if(j2vida==true){
             Dia4j2();
+            contadorpuntosj2 ++;
+          }
             break;
           case 5:
-            cout << "E\n";
-            break;
-          case 6:
-            cout << "F\n";
+          if(j2vida==true){
+            dia5j2();
+            contadorpuntosj2 ++; 
+          }
             break;
           }
           _getch();
@@ -811,8 +836,24 @@ cout << "\033[91m > 5.....Salir         \033[0m\n" << endl;
           contadorswitch++;
         }
 
-      } while (j1vida != 0 && j2vida != 0 && limitedias != 0);
+      } while (limitedias != 0);
       /*Agregar codigo aca papuh*/
+      if(contadorpuntoj1>contadorpuntosj2){
+        cout<<jugador1<<" Ganastes\n";
+      }else if(contadorpuntosj2>contadorpuntoj1){
+       cout<<jugador2<<" Ganastes\n";
+      }else{
+        cout<<jugador1<<" y "<<jugador2<<" han empatado\n";
+
+      }
+    cout<<"Puntos de "<<jugador1<<" "<<contadorpuntoj1<<"\n";
+    cout<<"Puntos de "<<jugador2<<" "<<contadorpuntosj2<<"\n";
+      do
+      {
+        cout << "Presiona 1 para volver al menu principal:";
+        cin >> resp;
+        cout << endl;
+      } while (resp != 1);
       break;
     case 2:
          cout << "\033[93m <Historia del juego/>  \033[0m\n" << endl;
@@ -1420,6 +1461,8 @@ void BuscarComida() {
             {
             case 1:
             cout<<"Has decidido cruzar, has muerto";
+            boom();
+            j1vida=false;
                 break;
             case 2: 
             cout<<"Sigues el camino y encuentras un material filoso con el que decides armar un cuchillo, el cual te servira para defenderte y poder cortar cosas.\n";
@@ -1610,12 +1653,14 @@ void bosque() {
                     cout << "Intentaste esconderte lo más rápido que pudiste pero tu esguince no te permitió llegar rápido y algo te vio\n";
                     cout << "Lo que te vio no parece ser humano, intentas correr pero fue en vano, te alcanzó\n";
                      boom();
+                     j1vida=false;
                     break;
             }
         } else if (q == 2) {
             cout << "Intentas huir pero el esguince no te deja avanzar, por lo que al intentar correr haces mucho ruido " << endl;
             cout << "por lo que alertas a los seres que habitan ahí, no parecen ser humanos, ves que uno se pone en 4 patas y corre hacia ti" << endl;
              boom();
+             j1vida=false;
 
         }
         
@@ -1684,7 +1729,8 @@ void bosque() {
         case 1:
             cout << "Decides esperar mientras la caja deja de pitar y parpadear, la luz cada vez parpadea más rápido y el ruido es insoportable" << endl;
             cout << "BOMMMM!!!" << endl;
-            boom(); 
+            boom();
+            j1vida=false; 
             break;
         case 2:
             cout << "Decides correr, alejandote lo mas rapido posible de la caja fuerte." << endl;
@@ -1795,6 +1841,7 @@ void bosque() {
             cout << "Parece que algo del fondo viene rqpido hacia ti" << endl;
             cout << "ES UN TIBURON!" << endl;
             boom(); 
+            j1vida=false;
         }    
             }  
             else
@@ -1907,7 +1954,19 @@ void playa() {
         } while (e != 1 && e != 2);
 
         if (e == 1) {
-
+         limitealeatorio = 2;
+         numale = numrand(limitealeatorio);
+         switch(numale){
+          case 1:
+          cout<<"Te salvas\n";
+          volvercamp();
+          break;
+          case 2:
+          cout<<"Algo te escucho y acabo contigo\n";
+          boom();
+          j1vida=false;
+          break;
+         }
         } else {
             cout << "Decides no hacer caso y aquella mirada que sentiste que te seguia se te presenta enfrente." << endl;
             cout << "Aquello que tienes enfrente parece estar muy hambriento, no tienes mucho que hacer." << endl;
@@ -1923,9 +1982,11 @@ void playa() {
                 cout << "Decides correr, tratando de escapar de la amenaza." << endl;
                 cout << "Pero te alcanza." << endl;
                 boom();
+                j1vida=false;
             } else if (x == 2) {
                 cout << "Decides enfrentar tu destino con valentía." << endl;
                 boom();
+                j1vida=false;
             }
         }
     }
@@ -2149,6 +2210,7 @@ void J2Cap3() {
                 cout << "Corres lo mas que puedas, sin embargo, logran escucharte y logran rodearte\n";
                 cout << "Ahora te han atrapado y has muerto\n";
                 boom();
+                j2vida=false;
                 return;
             } else {
                 cout << "A pesar de que estas muerto de los nervios decides salir sigilosamente, logras hacerlo con exito y una vez estas lo suficientemente lejos corres lo mas que puedas.\n";
@@ -2205,10 +2267,12 @@ void J2Cap3() {
                 cout << "Decides no usar el cuchillo.\n";
                 cout << "No tienes nada para defenderte y mueres a manos de los aldeanos.\n";
                 boom();
+                j2vida = false;
             }
         } else {
             cout << "No tienes nada para defenderte y mueres a manos de los aldeanos.\n";
             boom();
+            j2vida = false;
         }
     }
 }
@@ -2376,6 +2440,7 @@ void buscarAldea() {
                     case 2:
                         cout << "ALGUIEN TE VIO, parece que estos seres no son civilizados, te toman y te sacrificaran" << endl;
                         boom();
+                        j2vida=false;
                         break;
                 }
             } else {
@@ -2495,6 +2560,7 @@ void misionSecundaria() {
             cout << "Caminas un poco hasta subir al risco y estas listo para tirarte, tomas carrera y te lanzas" << endl;
             cout << "El nivel del agua era de poco menos de un metro, por lo que la caida desde esa altura fue fatal" << endl;
             boom();
+            j2vida=false;
         } else {
             cout << "Decides no tirarte y optas por entrar cuidadosamente, el agua esta calida" << endl;
             cout << "Te percatas que no esta tan hondo como pensabas, el nivel del agua es poco mas de un metro por lo que una caida desde el risco hubiese sido fatal" << endl;
@@ -2638,6 +2704,7 @@ void misionSecundaria() {
          cout<<"Tomas lo primero que tenias a la mano y corres gritando para golpear, lo ultimo que recuerdas fue un disparo\n";
          cout<<"Eran los militares que venian a rescatarte, pero por ese pensamiento de atacar primero y preguntar despues no contaras lo visto en la isla\n";
          boom();
+         j1vida=false;
         }else{
           cout<<"Los dos entes entran en la estacion, y resulta que eran los militares que venian a rescatarte\n";
           cout<<"Finalmente logras salir de la isla por helicoptero\n";
@@ -2665,6 +2732,7 @@ void misionSecundaria() {
             cout<<"No le das importacia, pero luego de un rato te empiezas a sentir mal\n";
             cout<<"Parece que era un gran cristal de uranio, al fin y al cabo este lugar era una base militar, pero porque tenian uranio en tal cantidad\n";
             boom();
+            j1vida=false;
             break;
             case 2:
             cout<<"Abres la puerta y encuentras una radio en perfecto estado, la usas para llamar a alguien\n";
@@ -2678,12 +2746,14 @@ void misionSecundaria() {
          }else{
            cout<<"No abres la puerta, luego de un rato sin saber que hacer sales pero la lluvia es muy fuerte y con tanta niebla te pierdes, finalmente por el cansancio caes\n";
            boom();
+           j1vida=false;
          }
        }
          
       }else{
         cout<<"Regresas al refugio, pero en camino te agarra la lluvia, esta comienza a ser cada vez mas furte, y con la neblina empiezas a desorientarte, finalmente por el cansancio caes\n";
         boom();
+        j1vida=false;
       }
     }else{
       cout<<"Te dirijes a la playa y cuando ibas de camino ves una gran nube de lluvia, que se acerca poco a poco\n";
@@ -2737,16 +2807,19 @@ void misionSecundaria() {
           case 2:
           cout<<"Fuerzas donde va la llave, pero lo unico que logras es crear un derrame de gasolina de la lancha, pero no te distes cuentas y una flama creada por la friccion del forcejeo creo una gran explosion\n";
           boom();
+          j1vida=false;
         }  
         }else{
           cout<<"Sales a investigar y la tormenta no ha parado, asi que esperas en el puerto pero por la tormenta se crea en el mar un gran tifon\n";
           cout<<"Intentas correr pero ya es muy tarde y eres arrastrado por el tifon al mar avierto\n";
           boom();
+          j1vida=false;
         }
       }
       }else{
         cout<<"Regresas al refugio, pero en camino te agarra la lluvia, esta comienza a ser cada vez mas furte, y con la neblina empiezas a desorientarte, finalmente por el cansancio caes\n";
         boom();
+        j1vida=false;
       }
     }
  }
@@ -2800,12 +2873,14 @@ void dia5j2(){
             cout<<"Al saltar te caes y te rompes el cuello\n";
             cout<<"Nunca sabras si te vieron\n";
             boom();
+            j2vida=false;
             break;
         }
     }
     }else{
         cout<<"Regresas al refugio, pero en camino te agarra la lluvia, esta comienza a ser cada vez mas furte, y con la neblina empiezas a desorientarte, finalmente por el cansancio caes\n";
         boom();
+        j2vida=false;
     }
    }else{
        cout<<"Te dirijes al bosque, pero empieza a llover\n";
@@ -2843,6 +2918,7 @@ void dia5j2(){
                 cout<<"El avion termino explotando\n";
                 cout<<"No quedo mucho de ti\n";
                 boom();
+                j2vida=false;
                 break;
             }
         }else{
@@ -2865,11 +2941,13 @@ void dia5j2(){
                 cout<<"Intentas golpear pero te reciven con una bala\n";
                 cout<<"La verdad no se que esperabas\n";
                 boom();
+                j2vida=false;
             }
         }
        }else{
          cout<<"Regresas al refugio, pero en camino te agarra la lluvia, esta comienza a ser cada vez mas furte, y con la neblina empiezas a desorientarte, finalmente por el cansancio caes\n";
         boom();
+        j2vida=false;
        }
    }
 }
