@@ -1956,11 +1956,10 @@ char invt;
 
 void boom(){
     string mensaje = "\033[31mFalleciste\033[0m\n";
-    int retardo = 100; 
 
     for (char c : mensaje) {
         cout << c << flush;
-         this_thread::sleep_for(chrono::milliseconds(retardo));
+      
  
     }
 }
@@ -1988,6 +1987,7 @@ void RelajarseYConvivir() {
         cout << "Te sientes mas util y parte de la comunidad.\n";
     }
       cout << "Por confiar en ellos, te obsequian un mapa, el cual te ayudaria a estar al tanto de donde esta cada cosa.\n";
+      inventario2();
 }
 
 void EncuentroAldeanos();
@@ -2110,8 +2110,9 @@ void EncuentroAldeanos() {
             RelajarseYConvivir();
         }
     } else {
-        RelajarseYConvivir();
+    
         cout << "Te ofrecen un lugar acogedor para poder pasar la noche.\n";
+            RelajarseYConvivir();
     }
 }
 
@@ -2144,16 +2145,19 @@ void J2Cap3() {
             if (decision1cap3 == 1) {
                 cout << "Corres lo mas que puedas, sin embargo, logran escucharte y logran rodearte\n";
                 cout << "Ahora te han atrapado y has muerto\n";
+                boom();
                 return;
             } else {
                 cout << "A pesar de que estas muerto de los nervios decides salir sigilosamente, logras hacerlo con exito y una vez estas lo suficientemente lejos corres lo mas que puedas.\n";
                 cout << "Te encuentras en medio del bosque, sin embargo, tienes un mapa por el cual te podras guiar y volver a la aldea si asi lo deseas";
+                inventario2();
             }
         } else {
             cout << "Encuentras una entrada trasera menos vigilada.\n";
             cout << "Logras escapar a traves de esa entrada.\n";
-            cout << "Te encuentras en medio del bosque, sin embargo, tienes un mapa por el cual te podras guiar y volver a la aldea si asi lo deseas";
+            cout << "Te encuentras en medio del bosque, sin embargo, tienes un mapa por el cual te podras guiar y volver a la aldea si asi lo deseas\n";
             cout << "pero ya se esta haciendo tarde y la luz del dia se esta acabando, decides acostarte sobre una roca pero por el miedo no puedes dormir" << endl;
+            inventario2();
 
         }
 
@@ -2174,6 +2178,7 @@ void J2Cap3() {
             cout << "Logras escapar ileso y te encuentras en medio del bosque, sin tener otro rumbo alguno.\n";
             cout << "sin embargo, tienes un mapa por el cual te podras guiar y volver a la aldea si asi lo deseas";
             cout << "pero ya se esta haciendo tarde y la luz del dia se esta acabando, decides acostarte sobre una roca pero por el miedo no puedes dormir" << endl;
+            inventario2();
 
         }
     } else {
@@ -2191,6 +2196,7 @@ void J2Cap3() {
                 cout << "Logras huir y te encuentras en medio del bosque.\n";
                 cout << "sin embargo, tienes un mapa por el cual te podras guiar y volver a la aldea si asi lo deseas";
                 cout << "pero ya se esta haciendo tarde y la luz del dia se esta acabando, decides acostarte sobre una roca pero por el miedo no puedes dormir" << endl;
+                inventario1();
 
             } else {
                 cout << "Decides no usar el cuchillo.\n";
